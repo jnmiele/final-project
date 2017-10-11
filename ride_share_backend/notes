@@ -1,0 +1,15 @@
+# USER MODEL
+# has_secure_password
+# has_many :trips
+# has_many :vehicles, through: :trips
+
+# VEHICLE MODEL
+# has_many :trips
+# has_many :users, through: :trips
+
+# TRIP MODEL
+# belongs_to :vehicle
+# belongs_to :user
+
+
+WE WILL WANT THE ABILITY TO CREATE USERS, SO WE WILL NEED A USER#CREATE ACTION AND A /SIGNUP THAT MAPS TO THIS CONTROLLER ACTION
