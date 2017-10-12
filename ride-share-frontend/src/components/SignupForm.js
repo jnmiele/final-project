@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { createUser } from '../actions/users'
@@ -25,8 +25,8 @@ class SignupForm extends React.Component {
       name: [this.state.firstName, this.state.lastName],
       password: this.state.password
     }
-    createUser(userParams)
-    this.setState({email:"", firstName:"", lastName: "", password:"", passwordConfirmation:""})
+    this.props.createUser(userParams)
+    this.props.history.push('/home')
   }
 
   checkPassword() {
@@ -91,22 +91,18 @@ handlePasswordConfirmationChange = (event) => {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: {
-      email: state.email,
-      name: state.name,
-      password: state.password
-    }
-  }
-}
 
-function mapDispatchtoProps(dispatch) {
-  return{
+function mapDispatchToProps(dispatch) {
+  return {
     createUser: (userParams) => {
       dispatch(createUser(userParams))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupForm)
+export default connect(null, mapDispatchToProps)(SignupForm)
+
+
+
+
+

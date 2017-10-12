@@ -1,11 +1,11 @@
-function usersReducer(state = {user: {email: "", name: [], password: ""}}, action) {
+function usersReducer(state = {currentUser: {id: "", name: "", loggedIn: localStorage.getItem("jwtToken") ? true : false}}, action) {
 	switch (action.type) {
-		case "CREATE_USER":
-			return Object.assign({}, state, {user: {...state.user, user: action.payload}})
 		case "LOGIN_USER":
-			return Object.assign({}, state, {user: {...state.user, user: action.payload}})
+			localStorage.setItem("jwtToken", action.payload.jwt)
+			const newCurrentUser = {id: action.payload.user_id, name: action.payload.user_name, loggedIn: true}
+			return Object.assign({}, state, {currentUser: newCurrentUser })
 		default:
-		return state
+			return state
 	}
 }
 

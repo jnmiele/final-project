@@ -1,23 +1,6 @@
-function doSignup(userParams) {
-	return {
-		type: "CREATE_USER",
-		payload: userParams
-	};
-}
-
-function doLogin(loginParams) {
-	return {
-		type: "LOGIN_USER",
-		payload: loginParams
-	};
-}
-
 export function createUser(userParams) {
-
   const body = JSON.stringify(userParams)
-  console.log("you hit the createUser method, we're trying to hit the backend with these params:", userParams)
   return function(dispatch) {
-  	debugger
   	fetch("http://localhost:3000/signup", {
     method: "POST",
     headers: {
@@ -27,7 +10,35 @@ export function createUser(userParams) {
     body: body
   })
   .then(res => res.json())
-  .then(res => console.log(res))
+  .then(res => dispatch(doLogin(res)))
 	}
 }
 
+function doLogin(params) {
+  return {
+    type: "LOGIN_USER",
+    payload: params
+  }
+}
+
+export function setUser() {
+  return function(dispatch) {
+   
+  }
+}
+
+export function loginUser(params) {
+  const body = JSON.stringify(params)
+  return function(dispatch) {
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: body
+    })
+    .then(res => res.json())
+    .then(res => dispatch(doLogin(res)))
+  }
+}
