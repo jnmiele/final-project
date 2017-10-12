@@ -3,7 +3,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Trip = (props) => {
-	const showURL = `trips/${props.id}`
+	const tripShowURL = `trips/${props.id}`
+	const userShowURL = `users/${props.id}`
 	return(
 		<div className="trip">
 			<div className="trip-origin">
@@ -13,9 +14,9 @@ const Trip = (props) => {
 				Destination: {props.destination}
 			</div>
 			<div className="trip-user">
-				User: {props.userId}
+				<Link to={userShowURL}> User: {props.userId} </Link>
 			</div>
-			<Link to={showURL}> View Details </Link>
+			<Link to={tripShowURL}> View Details </Link>
 		</div>
 	)
 }

@@ -9,6 +9,7 @@ import SignupForm from './components/SignupForm'
 import TripsContainer from './components/TripsContainer'
 import TripForm from './components/TripForm'
 import TripShow from './components/TripShow'
+import UsersShow from './components/UsersShow'
 
 
 
@@ -20,10 +21,11 @@ class App extends Component {
         <NavBar />
         <Route exact path="/" render={(props) => <Home {...props} />}/>
         <Route exact path="/trips" render={(props) => <TripsContainer {...props} />}/>
-        <Route exact path="/trips/:id" render={(props) => <TripShow {...props} />}/>
-        <Route exact path="/signup" render={(props) => <SignupForm {...props} />}/>
-        <Route exact path="/login" render={(props) => <LoginForm {...props} />}/>
-        <Route exact path="/trips/new" render={(props) => <TripForm {...props} />}/>
+        <Route path="/new_trip" render={(props) => <TripForm {...props} />}/>
+        <Route path="/trips/:id" render={(props) => <TripShow {...props} />}/>
+        <Route path="/users/:id" render={(props) => <UsersShow {...props} />}/>
+        <Route path="/signup" render={(props) => <SignupForm {...props} />}/>
+        <Route path="/login" render={(props) => <LoginForm {...props} />}/>
       </div>
     );
   }

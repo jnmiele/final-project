@@ -15,10 +15,11 @@ class TripsContainer extends React.Component {
 	}
 
 	render() {
-		console.log(this.props)
+		
 		return(
 			<div>
 				<h1> Yo hello from TripsContainer </h1>
+				<input type="text" placeholder="where ya headed?"/>
 				<TripsList trips={this.props.trips} />
 			</div>
 		)

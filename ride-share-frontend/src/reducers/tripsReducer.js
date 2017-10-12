@@ -1,9 +1,8 @@
-function tripsReducer(state = {user: {}, list: []}, action) {
+function tripsReducer(state = {list: []}, action) {
 	switch (action.type) {
 
 		case "CREATE_TRIP":
 			const newTrip = action.payload
-			debugger // check to see what payload is here to ensure we are adding the new trip to our trips state.
 			return state = {...state.list, newTrip: newTrip}
 
 		case "DELETE_TRIP":

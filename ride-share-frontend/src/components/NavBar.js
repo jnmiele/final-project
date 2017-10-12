@@ -15,7 +15,10 @@ const NavBar = () => {
        <Link to='/' >Home</Link>
       </div>
       <div className="nav-item">
-       <Link to='/trips/new'>Start a Trip</Link>
+       <Link to='/new_trip'>Start a Trip</Link>
+      </div>
+      <div className="nav-item">
+       <Link to='/trips'>Find a Trip</Link>
       </div>
       <div className="nav-item">
       	{(localStorage.getItem("jwtToken")) ? <a data-id="logout" href="">Logout</a> : <div> <Link to='/login'>Login</Link><br/><Link to='/signup'>Signup</Link> </div> }

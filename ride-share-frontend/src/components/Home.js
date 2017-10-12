@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import {fetchAllTrips } from '../actions/trips'
 import LoginForm from './LoginForm'
 import TripsList from './TripsList'
@@ -17,7 +18,11 @@ class Home extends React.Component {
 			return(
 			<div>
 				<div>
-					<TripForm />
+					<br/><br/><br/><br/>
+					<h3> Going somewhere? Bring somebody!</h3>
+					<Link to="/new_trip"><button>Start a Trip</button></Link>
+					<Link to="/trips"><button>Find a Trip</button></Link>
+					<br/><br/><br/><br/>
 				</div>
 				<TripsList trips={this.props.trips} />
 			</div>

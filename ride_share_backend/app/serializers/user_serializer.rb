@@ -1,4 +1,4 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :rating
+  attributes :id, :email
 	has_many :trips
 end

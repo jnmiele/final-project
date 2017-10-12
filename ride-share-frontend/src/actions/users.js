@@ -42,3 +42,27 @@ export function loginUser(params) {
     .then(res => dispatch(doLogin(res)))
   }
 }
+
+
+export function show(user) {
+  const token = localStorage.getItem("jwtToken")
+  return function(dispatch) {
+    fetch(`http://localhost:3000${user}`, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => dispatch(showUser(res)))
+  }
+}
+
+function showUser(user) {
+  return {
+    type: "SHOW_USER",
+    payload: user
+  }
+}
