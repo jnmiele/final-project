@@ -2,8 +2,8 @@ import React from 'react';
 
 import { setUser } from '../actions/users'
 import {fetchAllTrips } from '../actions/trips'
+import { Card, Loader } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-
 import TripsList from './TripsList'
 
 
@@ -15,12 +15,11 @@ class TripsContainer extends React.Component {
 	}
 
 	render() {
-		
 		return(
 			<div>
 				<h1> Yo hello from TripsContainer </h1>
 				<input type="text" placeholder="where ya headed?"/>
-				<TripsList trips={this.props.trips} />
+				<TripsList />
 			</div>
 		)
 	}
