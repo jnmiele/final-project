@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { createTrip } from '../actions/trips'
 import { setUser } from '../actions/users'
 
+
 class TripForm extends React.Component {
 
   state = {
@@ -26,6 +27,8 @@ class TripForm extends React.Component {
     }
     this.props.createTrip(tripParams)
     this.props.history.push('/trips')
+    // this.props.history.push(`/users/${tripParams.user.user_id}`) // posters show page
+
   }
 
   handleOriginChange = (event) => {

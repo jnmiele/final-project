@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Home from './components/Home'
 import LoginForm from './components/LoginForm'
 import NavBar from './components/NavBar'
 import SignupForm from './components/SignupForm'
 import TripsContainer from './components/TripsContainer'
-import TripForm from './components/TripForm'
 import TripShow from './components/TripShow'
 import UsersShow from './components/UsersShow'
 
@@ -19,13 +18,17 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
-        <Route exact path="/" render={(props) => <Home {...props} />}/>
-        <Route exact path="/trips" render={(props) => <TripsContainer {...props} />}/>
-        <Route path="/new_trip" render={(props) => <TripForm {...props} />}/>
-        <Route path="/trips/:id" render={(props) => <TripShow {...props} />}/>
-        <Route path="/users/:id" render={(props) => <UsersShow {...props} />}/>
-        <Route path="/signup" render={(props) => <SignupForm {...props} />}/>
-        <Route path="/login" render={(props) => <LoginForm {...props} />}/>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/signup" component={SignupForm}/>
+          <Route exact path="/login" component={LoginForm}/>
+          <Route exact path="/users/:id" component={UsersShow}/>
+
+          <Route exact path="/trips/new" component={TripsContainer}/>
+          <Route exact path="/trips" component={TripsContainer}/>
+          <Route exact path="/trips/:id" component={TripShow}/>
+          <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
+        </Switch>
       </div>
     );
   }

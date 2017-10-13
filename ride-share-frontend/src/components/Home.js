@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {fetchAllTrips } from '../actions/trips'
 import LoginForm from './LoginForm'
-import TripsList from './TripsList'
-import TripForm from './TripForm'
+import TripsContainer from './TripsContainer'
 
 class Home extends React.Component {
 
@@ -20,26 +19,23 @@ class Home extends React.Component {
 				<div>
 					<br/><br/><br/><br/>
 					<h3> Going somewhere? Bring somebody!</h3>
-					<Link to="/new_trip"><button>Start a Trip</button></Link>
+					<Link to="/trips/new"><button>Start a Trip</button></Link>
 					<Link to="/trips"><button>Find a Trip</button></Link>
 					<br/><br/><br/><br/>
-				</div>
-				<TripsList trips={this.props.trips} />
-			</div>
-		)
-		} else {
-			return(
-			<div>
-				<div>
-					<LoginForm />
-				</div>
-				<div>
-					<TripsList trips={this.props.trips} />
 				</div>
 			</div>
 		)
 		}
-		
+		return(
+		<div>
+			<div>
+				<LoginForm />
+			</div>
+			<div>
+				<TripsContainer />
+			</div>
+		</div>
+		)
 	}
 }
 

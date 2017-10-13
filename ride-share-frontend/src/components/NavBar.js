@@ -12,10 +12,10 @@ const NavBar = () => {
 	return(
     <nav onClick={onClick} className="navbar">
       <div className="nav-item">
-       <Link to='/' >Home</Link>
+       <Link to='/'>Home</Link>
       </div>
       <div className="nav-item">
-       <Link to='/new_trip'>Start a Trip</Link>
+       <Link to='/trips/new'>Start a Trip</Link>
       </div>
       <div className="nav-item">
        <Link to='/trips'>Find a Trip</Link>

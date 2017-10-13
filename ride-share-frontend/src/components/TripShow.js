@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { showTrip } from '../actions/trips'
+import { showTrip, joinTrip } from '../actions/trips'
 
 
 class TripShow extends React.Component {
@@ -10,6 +9,15 @@ class TripShow extends React.Component {
 	componentDidMount(){
 		const showURL = (this.props.location.pathname)
 		this.props.showTrip(showURL)
+	}
+
+	onClick = (event) => {
+		const tripId = event.target.id
+		this.props.joinTrip(tripId)
+		// make request to backend to decrement the amount of open seats in the car
+		// if user already requested to join the trip it will render "AWAITING CONFIRMATION", and "YOU'RE IN!" if accepted
+		// trip also needs to display the users associated with it, these users are PASSENGERS class_name = "User"
+
 	}
 
 	render() {
@@ -26,14 +34,14 @@ class TripShow extends React.Component {
 					<div className="trip-user">
 						User: {thisTrip.user_id}
 					</div>
+					<button id={thisTrip.id} onClick={this.onClick}> Join Trip </button>
 					
 				</div>
 			)
-		} else {
-			return(
-				<div> loader page </div>
-			)
-		}		
+		}
+		return(
+			<div> loader page </div>
+		)
 	}
 }
 
@@ -41,6 +49,9 @@ function mapDispatchToProps(dispatch) {
 	return {
     showTrip: (trip) => {
       dispatch(showTrip(trip))
+    },
+    joinTrip: (trip) => {
+    	dispatch(joinTrip(trip))
     }
   }
 }

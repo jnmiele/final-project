@@ -1,7 +1,7 @@
-export function createTrip(tripParams) {
+export function createTrip(tripParams, history) {
   const token = localStorage.getItem("jwtToken")
   const body = JSON.stringify(tripParams)
-  return function(dispatch) {
+  return function(dispatch, history) {
   	fetch("http://localhost:3000/trips/new", {
     method: "POST",
     headers: {
@@ -67,3 +67,31 @@ function showPage(trip) {
     payload: trip
   }
 }
+
+
+export function joinTrip(trip) {
+  const token = localStorage.getItem("jwtToken")
+  const body = JSON.stringify(trip)
+  console.log(trip)
+  return function(dispatch) {
+    fetch(`http://localhost:3000${trip}`, {
+      method: "GET", /* this is going to be a PATCH request I think? */
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(res => dispatch(join(res)))
+  }
+}
+
+function join(trip) {
+  return {
+    type: "JOIN_TRIP",
+    payload: trip
+  }
+}
+
+
+

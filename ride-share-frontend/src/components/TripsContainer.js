@@ -2,24 +2,31 @@ import React from 'react';
 
 import { setUser } from '../actions/users'
 import {fetchAllTrips } from '../actions/trips'
-import { Card, Loader } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import TripForm from './TripForm'
 import TripsList from './TripsList'
 
 
 class TripsContainer extends React.Component {
 
 	componentDidMount(){
+		console.log('mounting trips container')
 		const token = localStorage.getItem("jwtToken")
 		this.props.fetchAllTrips(token)
+	}
+
+	renderComponents = (props) => {
+		if (props.location.pathname === "/trips"){
+			return (<TripsList />)
+		} else if (props.location.pathname === "/trips/new") {
+			return (<TripForm {...props}/>)
+		}
 	}
 
 	render() {
 		return(
 			<div>
-				<h1> Yo hello from TripsContainer </h1>
-				<input type="text" placeholder="where ya headed?"/>
-				<TripsList />
+				{this.renderComponents(this.props)}
 			</div>
 		)
 	}
