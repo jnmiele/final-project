@@ -1,0 +1,37 @@
+{	
+	"id":5,
+	"user": {
+		"id":2,
+		"email":"g",
+		"name":"Gabi",
+		"password_digest":"$2a$10$ityzk5CwwdUKAZDSDr3Z5u/rR6I/2mKrn8SF8z8ldU.kctN.x4AVK",
+		"created_at":"2017-10-14T01:39:26.044Z",
+		"updated_at":"2017-10-14T01:39:26.044Z"
+	},
+	"trip": {
+		"id":2,
+		"destination":"Long Island",
+		"origin":"Queens",
+		"created_at":"2017-10-14T02:37:45.698Z",
+		"updated_at":"2017-10-14T02:37:45.698Z"
+	},
+	"role":"Passenger"
+}
+
+
+
+
+WE WANT:
+
+{
+	"id": 5,
+	"user": {
+		"id": 2,
+		"name": Gabi
+	},
+	"trip": {
+		"id":2,
+		"destination":"Long Island",
+		"origin":"Queens"
+	}
+}

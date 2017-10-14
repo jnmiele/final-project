@@ -8,7 +8,7 @@ class UserTripsController < ApplicationController
 			role: "Passenger"
 		)
 		if @u.save
-			render json: {@u}
+			render json: @u
 		else
     	render json: { message: "Error"}
   	end

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { showTrip, requestJoin } from '../actions/trips'
 
@@ -24,7 +24,7 @@ class TripShow extends React.Component {
 	render() {
 		const thisTrip = (this.props.trips.trips.thisTrip)
 
-		if (thisTrip) {
+		if (thisTrip && localStorage.getItem('jwtToken')) {
 			return(
 				<div className="trip">
 					<div className="trip-origin">
@@ -39,9 +39,11 @@ class TripShow extends React.Component {
 					<button id={thisTrip.id} onClick={this.onClick}> Join Trip </button>
 				</div>
 			)
+		} else if (thisTrip) {
+			<div> loader page </div>
 		}
 		return(
-			<div> loader page </div>
+			<Redirect to='/login' />
 		)
 	}
 }

@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20171014003125) do
     t.integer "user_id"
     t.integer "trip_id"
     t.string "role"
-    t.boolean "confirmed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "confirmed", default: false
   end
 
   create_table "users", force: :cascade do |t|

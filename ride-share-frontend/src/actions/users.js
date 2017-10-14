@@ -14,19 +14,6 @@ export function createUser(userParams) {
 	}
 }
 
-function doLogin(params) {
-  return {
-    type: "LOGIN_USER",
-    payload: params
-  }
-}
-
-export function setUser() {
-  return function(dispatch) {
-   
-  }
-}
-
 export function loginUser(params) {
   const body = JSON.stringify(params)
   return function(dispatch) {
@@ -40,6 +27,13 @@ export function loginUser(params) {
     })
     .then(res => res.json())
     .then(res => dispatch(doLogin(res)))
+  }
+}
+
+function doLogin(params) {
+  return {
+    type: "LOGIN_USER",
+    payload: params
   }
 }
 
@@ -64,5 +58,13 @@ function showUser(user) {
   return {
     type: "SHOW_USER",
     payload: user
+  }
+}
+
+
+
+export function setUser() {
+  return function(dispatch) {
+   
   }
 }

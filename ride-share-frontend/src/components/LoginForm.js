@@ -10,15 +10,24 @@ class LoginForm extends React.Component {
     password: ''
   }
 
+  confirmLogin() {
+    setTimeout(() => {
+      if (this.props.currentUser.loggedIn === true) {
+        return this.props.history.push('/trips')
+      }
+      this.props.history.push('/login')
+    }, 1500)
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
+
     const loginParams = {
       email: this.state.email,
       password: this.state.password
     }
     this.props.loginUser(loginParams)
-    console.log(this.props.history)
-    debugger
+    this.confirmLogin()
   }
 
   handleEmailChange = (event) => {
@@ -34,21 +43,19 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    console.log(this)
     if (localStorage.getItem('jwtToken')) {
       return <Redirect to="/" />
-    } else {
-      return (
-        <div className="container">
-          <h1> Looks like you need to sign in... </h1>
-          <form onSubmit={this.handleSubmit}>
-            <input onChange={this.handleEmailChange} value={this.state.email} type="text" placeholder="enter your email" required="true"/><br/>
-            <input onChange={this.handlePasswordChange} value={this.state.password} type="password" placeholder="enter a password" required="true"/><br/>
-            <input type="submit" />
-          </form>
-          </div>
-      )
     }
+    return (
+      <div className="container">
+        <h1> Looks like you need to sign in... </h1>
+        <form onSubmit={this.handleSubmit}>
+          <input onChange={this.handleEmailChange} value={this.state.email} type="text" placeholder="enter your email" required="true"/><br/>
+          <input onChange={this.handlePasswordChange} value={this.state.password} type="password" placeholder="enter a password" required="true"/><br/>
+          <input type="submit" />
+        </form>
+        </div>
+    )
   }
 }
 
@@ -61,6 +68,12 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+function mapStateToProps(state) {
+  return {
+    currentUser: state.users.currentUser
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
 
 

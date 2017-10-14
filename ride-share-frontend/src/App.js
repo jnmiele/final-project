@@ -19,12 +19,12 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path="/" render={(props) => <Home {...props} />}/>
+          <Route exact path="/" render={(props) => <Home props={props} />}/>
           <Route exact path="/signup" component={SignupForm}/>
           <Route exact path="/login" component={LoginForm}/>
           <Route exact path="/users/:id" component={UsersShow}/>
 
-          <Route exact path="/trips/new" component={TripsContainer}/>
+          <Route exact path="/trips/new" render={(props) => <TripsContainer props={props}/>}/>
           <Route exact path="/trips" render={(props) => <TripsContainer props={props}/>}/>
           <Route exact path="/trips/:id" component={TripShow}/>
           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />

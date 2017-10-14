@@ -26,9 +26,7 @@ class TripForm extends React.Component {
       ...this.state, user: userId
     }
     this.props.createTrip(tripParams)
-    this.props.history.push('/trips')
-    // this.props.history.push(`/users/${tripParams.user.user_id}`) // posters show page
-
+    this.props.props.history.push('/trips')
   }
 
   handleOriginChange = (event) => {

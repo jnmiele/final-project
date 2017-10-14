@@ -1,8 +1,10 @@
 import React from 'react';
-
-import { setUser } from '../actions/users'
-import {fetchAllTrips } from '../actions/trips'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+
+import {fetchAllTrips } from '../actions/trips'
+import { setUser } from '../actions/users'
+import LoginForm from './LoginForm'
 import TripForm from './TripForm'
 import TripsList from './TripsList'
 
@@ -10,26 +12,31 @@ import TripsList from './TripsList'
 class TripsContainer extends React.Component {
 
 	componentDidMount(){
-		console.log('mounting trips container')
 		const token = localStorage.getItem("jwtToken")
 		this.props.fetchAllTrips(token)
 	}
 
 	renderComponents = (props) => {
-		if (window.location.pathname === "/trips"){
-			return (<TripsList />)
-		} else if (window.location.pathname === "/trips/new") {
-			return (<TripForm {...props}/>)
+		if (this.props.props) {
+			if (this.props.props.location.pathname === "/trips"){
+				return (<TripsList />)
+			} else if (this.props.props.location.pathname === "/trips/new") {
+				return (<TripForm {...props}/>)
+			}
 		}
 	}
 
 	render() {
-		return(
-			<div>
-				{this.renderComponents(this.props)}
-			</div>
-		)
-	}
+		if (!localStorage.getItem('jwtToken')) {
+      return <Redirect to="/login" />
+    } else {
+      return (
+        <div className="container">
+        	{this.renderComponents(this.props)}  
+        </div>
+      )
+    }
+  }
 }
 
 function mapDispatchToProps(dispatch) {

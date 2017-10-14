@@ -27,14 +27,14 @@ class Home extends React.Component {
 		)
 		}
 		return(
-		<div>
 			<div>
-				<LoginForm />
+				<div>
+					<LoginForm />
+				</div>
+				<div>
+					<TripsContainer />
+				</div>
 			</div>
-			<div>
-				<TripsContainer />
-			</div>
-		</div>
 		)
 	}
 }
