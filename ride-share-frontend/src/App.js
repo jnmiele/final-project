@@ -19,7 +19,7 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" render={(props) => <Home {...props} />}/>
           <Route exact path="/signup" component={SignupForm}/>
           <Route exact path="/login" component={LoginForm}/>
           <Route exact path="/users/:id" component={UsersShow}/>
@@ -35,3 +35,5 @@ class App extends Component {
 }
 
 export default App;
+
+          // <Route exact path="/" component={Home}/>

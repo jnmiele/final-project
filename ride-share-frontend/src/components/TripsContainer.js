@@ -16,9 +16,9 @@ class TripsContainer extends React.Component {
 	}
 
 	renderComponents = (props) => {
-		if (props.location.pathname === "/trips"){
+		if (window.location.pathname === "/trips"){
 			return (<TripsList />)
-		} else if (props.location.pathname === "/trips/new") {
+		} else if (window.location.pathname === "/trips/new") {
 			return (<TripForm {...props}/>)
 		}
 	}

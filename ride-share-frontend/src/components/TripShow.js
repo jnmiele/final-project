@@ -1,7 +1,11 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { showTrip, joinTrip } from '../actions/trips'
+import { showTrip, requestJoin } from '../actions/trips'
+
+/* ADD A TERNARY OPERATOR FOR THE BUTTON THAT CHECKS CURRENTUSER.ID VS TRIP.DRIVER.ID VS TRIP.PASSENGERS.ID */
+
 
 
 class TripShow extends React.Component {
@@ -13,15 +17,13 @@ class TripShow extends React.Component {
 
 	onClick = (event) => {
 		const tripId = event.target.id
-		this.props.joinTrip(tripId)
-		// make request to backend to decrement the amount of open seats in the car
-		// if user already requested to join the trip it will render "AWAITING CONFIRMATION", and "YOU'RE IN!" if accepted
-		// trip also needs to display the users associated with it, these users are PASSENGERS class_name = "User"
-
+		this.props.requestJoin(tripId)
+		// on click send request to driver
 	}
 
 	render() {
 		const thisTrip = (this.props.trips.trips.thisTrip)
+
 		if (thisTrip) {
 			return(
 				<div className="trip">
@@ -32,10 +34,9 @@ class TripShow extends React.Component {
 						Destination: {thisTrip.destination}
 					</div>
 					<div className="trip-user">
-						User: {thisTrip.user_id}
+						Driver: <Link to={`users/${thisTrip.driver.id}`}> {thisTrip.driver.name} </Link>
 					</div>
 					<button id={thisTrip.id} onClick={this.onClick}> Join Trip </button>
-					
 				</div>
 			)
 		}
@@ -50,8 +51,8 @@ function mapDispatchToProps(dispatch) {
     showTrip: (trip) => {
       dispatch(showTrip(trip))
     },
-    joinTrip: (trip) => {
-    	dispatch(joinTrip(trip))
+    requestJoin: (trip) => {
+    	dispatch(requestJoin(trip))
     }
   }
 }

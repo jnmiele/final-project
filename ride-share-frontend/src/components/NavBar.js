@@ -21,7 +21,7 @@ const NavBar = () => {
        <Link to='/trips'>Find a Trip</Link>
       </div>
       <div className="nav-item">
-      	{(localStorage.getItem("jwtToken")) ? <a data-id="logout" href="">Logout</a> : <div> <Link to='/login'>Login</Link><br/><Link to='/signup'>Signup</Link> </div> }
+      	{(localStorage.getItem("jwtToken")) ? <a data-id="logout" href="">Logout</a> : <div className="nav-item"><Link to='/login'>Login</Link>  <Link to='/signup'>Signup</Link> </div> }
       </div>
     </nav>
 	)

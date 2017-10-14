@@ -69,24 +69,26 @@ function showPage(trip) {
 }
 
 
-export function joinTrip(trip) {
+export function requestJoin(trip) {
   const token = localStorage.getItem("jwtToken")
   const body = JSON.stringify(trip)
-  console.log(trip)
+  debugger
   return function(dispatch) {
-    fetch(`http://localhost:3000${trip}`, {
-      method: "GET", /* this is going to be a PATCH request I think? */
+    fetch(`http://localhost:3000/requests/new`, {
+      method: "POST",
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      },
+      body: body
     })
     .then(res => res.json())
-    .then(res => dispatch(join(res)))
+    .then(res => dispatch(sendReq(res)))
   }
 }
 
-function join(trip) {
+function sendReq(trip) {
   return {
     type: "JOIN_TRIP",
     payload: trip

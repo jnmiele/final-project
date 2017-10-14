@@ -14,10 +14,11 @@ const Trip = (props) => {
 					{props.origin} to {props.destination}
 				</Card.Header>
 				<Card.Meta>
-					Date: {props.date}
+					Date: {props.date} No Date Bro
 				</Card.Meta>
 				<Card.Description>
-					<Link to={userShowURL}> User: {props.userId} </Link>
+					Driver:<Link to={userShowURL}> {props.driver.name} </Link><br/>
+					Passengers: {props.passengers.length}
 				</Card.Description>
 			</Card.Content>
 			<Card.Content extra>

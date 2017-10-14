@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
       password: this.state.password
     }
     this.props.loginUser(loginParams)
-    this.props.history.push('/home')
+    window.history.push('/home')
   }
 
   handleEmailChange = (event) => {

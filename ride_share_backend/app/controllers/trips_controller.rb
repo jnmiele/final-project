@@ -2,10 +2,9 @@ class TripsController < ApplicationController
 	skip_before_action :authorized, only: [:show]
 
 	def create
-		@trip = Trip.new(trip_params)
+		@trip = Trip.create(trip_params)
     @user = User.find(params[:user][:user_id])
-    @trip.user = @user
-    @trip.save
+    UserTrip.create(user: @user, trip: @trip, role: "Driver")
     render json: @trip
 	end
 
