@@ -1,7 +1,7 @@
 class UserTripsController < ApplicationController
 
 	def create
-		@u = UserTrip.find_or_create(
+		@u = UserTrip.find_or_create_by(
 			user_id: params[:user_id],
 			trip_id: params[:trip],
 			role: "Passenger"

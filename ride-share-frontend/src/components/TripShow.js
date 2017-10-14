@@ -19,12 +19,12 @@ class TripShow extends React.Component {
 	onClick = (event) => {
 		const tripId = parseInt(event.target.id)
 		this.props.requestJoin(tripId)
-		debugger
 		// redirect back to user show page
 	}
 
 	render() {
 		const thisTrip = (this.props.trips.trips.thisTrip)
+		console.log(this.props)
 
 		if (thisTrip && localStorage.getItem('jwtToken')) {
 			return(
@@ -62,6 +62,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
+	debugger
 	return {
 		trips: state
 	}

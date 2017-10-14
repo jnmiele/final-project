@@ -7,26 +7,25 @@ import { show } from '../actions/users'
 class UsersShow extends React.Component {
 
 	componentDidMount(){
-		const showURL = (this.props.location.pathname)
-		this.props.show(showURL)
+		const user = (this.props.props.location.pathname)
+		this.props.show(user)
 	}
 
 	render() {
-		console.log(this.props)
-		const thisUser = (this.props.users.showUser)
-		if (thisUser) {
+		debugger
+		if (this.props && this.props.user.showUser) {
+			const thisUser = (this.props.users.showUser)
 			return(
 				<div className="user">
 					email: {thisUser.email}<br/>
 					id: {thisUser.id}
 				</div>
 			)
-		} else {
-			return(
-				<div> loader page for user </div>
-			)
-		}		
-	}
+		}
+		return(
+			<div> loader page for user </div>
+		)
+	}		
 }
 
 function mapDispatchToProps(dispatch) {
@@ -39,8 +38,9 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
 	return {
-		users: state.users,
-		userTrips: state.userTrips.list
+		user: state.users,
+		trips: state.trips.list,
+		userTrips: state.userTrips
 	}
 }
 

@@ -22,7 +22,7 @@ class App extends Component {
           <Route exact path="/" render={(props) => <Home props={props} />}/>
           <Route exact path="/signup" component={SignupForm}/>
           <Route exact path="/login" component={LoginForm}/>
-          <Route exact path="/users/:id" component={UsersShow}/>
+          <Route exact path="/users/:id" render={(props) => <UsersShow props={props}/>}/>
 
           <Route exact path="/trips/new" render={(props) => <TripsContainer props={props}/>}/>
           <Route exact path="/trips" render={(props) => <TripsContainer props={props}/>}/>
@@ -35,6 +35,3 @@ class App extends Component {
 }
 
 export default App;
-
-          // <Route exact path="/" component={Home}/>
-          // <Route exact path="/login" component={LoginForm}/>

@@ -15,7 +15,6 @@ class TripsContainer extends React.Component {
 	componentDidMount(){
 		const token = localStorage.getItem("jwtToken")
 		this.props.fetchAllTrips(token)
-		this.props.fetchAllUserTrips(token)
 	}
 
 	renderComponents = (props) => {
@@ -31,13 +30,12 @@ class TripsContainer extends React.Component {
 	render() {
 		if (!localStorage.getItem('jwtToken')) {
       return <Redirect to="/login" />
-    } else {
-      return (
-        <div className="container">
-        	{this.renderComponents(this.props)}  
-        </div>
-      )
     }
+    return (
+      <div className="container">
+      	{this.renderComponents(this.props)}  
+      </div>
+    )
   }
 }
 

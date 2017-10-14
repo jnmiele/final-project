@@ -10,7 +10,8 @@ class TripForm extends React.Component {
   state = {
     origin: '',
     destination: '',
-    date: ''
+    date: null,
+    time: null
   }
 
   componentDidMount() {
@@ -47,6 +48,12 @@ class TripForm extends React.Component {
     })
   }
 
+  handleTimeChange = (event) => {
+    this.setState({
+      time: event.target.value
+    })
+  }
+
   render() {
     if (!localStorage.getItem('jwtToken')) {
       return <Redirect to="/login" />
@@ -55,9 +62,10 @@ class TripForm extends React.Component {
         <div className="container">
           <h1>Let's go somewhere!</h1>
           <form onSubmit={this.handleSubmit}>
-            <input onChange={this.handleDestinationChange} type="text" placeholder="where to?" /><br/>
-            <input onChange={this.handleOriginChange} type="text" placeholder="where from?" /><br/>
-            <input onChange={this.handleDateChange} type="text" placeholder="when are you leaving?" /><br/>
+            <input onChange={this.handleDestinationChange} type="text" placeholder="where to?" required="true"/><br/>
+            <input onChange={this.handleOriginChange} type="text" placeholder="where from?" required="true"/><br/>
+            <input onChange={this.handleDateChange} type="date" required="true"/>
+            <input onChange={this.handleTimeChange} type="time" required="true"/><br/>
             <input type="submit" />
           </form>
           </div>

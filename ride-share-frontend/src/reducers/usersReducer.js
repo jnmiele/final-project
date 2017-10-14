@@ -10,7 +10,7 @@ function usersReducer(state = {currentUser: {id: "", name: "", loggedIn: localSt
 			
 		case "SHOW_USER":
 			const showUser = action.payload
-			return state = {...state, showUser}
+			return state = {...state, showUser: showUser}
 
 		default:
 			return state
