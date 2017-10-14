@@ -2,9 +2,11 @@ function usersReducer(state = {currentUser: {id: "", name: "", loggedIn: localSt
 	switch (action.type) {
 
 		case "LOGIN_USER":
-			localStorage.setItem("jwtToken", action.payload.jwt)
-			const newCurrentUser = {id: action.payload.user_id, name: action.payload.user_name, loggedIn: true}
-			return state = {...state}
+			if (!action.payload.message) {
+				localStorage.setItem("jwtToken", action.payload.jwt)
+			}
+			const currentUser = {id: action.payload.user_id, name: action.payload.user_name, loggedIn: localStorage.getItem("jwtToken") ? true : false}
+			return state = {...state, currentUser}
 			
 		case "SHOW_USER":
 			const showUser = action.payload

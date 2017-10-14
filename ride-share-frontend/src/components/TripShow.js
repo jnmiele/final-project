@@ -2,7 +2,8 @@ import React from 'react'
 
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { showTrip, requestJoin } from '../actions/trips'
+import { showTrip } from '../actions/trips'
+import { requestJoin } from '../actions/userTrips'
 
 /* ADD A TERNARY OPERATOR FOR THE BUTTON THAT CHECKS CURRENTUSER.ID VS TRIP.DRIVER.ID VS TRIP.PASSENGERS.ID */
 
@@ -18,7 +19,8 @@ class TripShow extends React.Component {
 	onClick = (event) => {
 		const tripId = parseInt(event.target.id)
 		this.props.requestJoin(tripId)
-		// on click send request to driver
+		debugger
+		// redirect back to user show page
 	}
 
 	render() {

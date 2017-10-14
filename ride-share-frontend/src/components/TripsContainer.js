@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import {fetchAllTrips } from '../actions/trips'
+import {fetchAllUserTrips } from '../actions/userTrips'
 import { setUser } from '../actions/users'
 import LoginForm from './LoginForm'
 import TripForm from './TripForm'
@@ -14,6 +15,7 @@ class TripsContainer extends React.Component {
 	componentDidMount(){
 		const token = localStorage.getItem("jwtToken")
 		this.props.fetchAllTrips(token)
+		this.props.fetchAllUserTrips(token)
 	}
 
 	renderComponents = (props) => {
@@ -46,6 +48,9 @@ function mapDispatchToProps(dispatch) {
     },
     fetchAllTrips: (token) => {
     	dispatch(fetchAllTrips(token))
+    },
+    fetchAllUserTrips: (token) => {
+    	dispatch(fetchAllUserTrips(token))
     }
   }
 }

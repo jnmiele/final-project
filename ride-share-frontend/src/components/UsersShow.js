@@ -12,6 +12,7 @@ class UsersShow extends React.Component {
 	}
 
 	render() {
+		console.log(this.props)
 		const thisUser = (this.props.users.showUser)
 		if (thisUser) {
 			return(
@@ -38,7 +39,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
 	return {
-		users: state.users
+		users: state.users,
+		userTrips: state.userTrips.list
 	}
 }
 

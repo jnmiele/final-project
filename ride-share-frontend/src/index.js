@@ -7,12 +7,14 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import tripsReducer from './reducers/tripsReducer'
 import usersReducer from './reducers/usersReducer'
+import userTripsReducer from './reducers/userTripsReducer'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
 	users: usersReducer, 
-	trips: tripsReducer
+	trips: tripsReducer,
+	userTrips: userTripsReducer
 })
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));

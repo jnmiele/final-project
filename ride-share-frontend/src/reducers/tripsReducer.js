@@ -3,7 +3,7 @@ function tripsReducer(state = {list: []}, action) {
 
 		case "CREATE_TRIP":
 			const newTrip = action.payload
-			return state = {list: [...state.list, newTrip: newTrip]}
+			return state = {list: [...state.list, newTrip]}
 
 		case "DELETE_TRIP":
 			const trip = action.payload

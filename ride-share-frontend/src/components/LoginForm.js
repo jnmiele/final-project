@@ -15,8 +15,9 @@ class LoginForm extends React.Component {
       if (this.props.currentUser.loggedIn === true) {
         return this.props.history.push('/trips')
       }
+      this.setState({email: '', password: ''})
       this.props.history.push('/login')
-    }, 1500)
+    }, 300)
   }
 
   handleSubmit = (event) => {

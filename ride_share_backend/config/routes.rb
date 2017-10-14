@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/trips', to: 'trips#index'
 
   post '/usertrips/create', to: 'user_trips#create'
+  get '/usertrips', to: 'user_trips#index'
 end
