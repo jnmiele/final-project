@@ -25,7 +25,7 @@ class App extends Component {
           <Route exact path="/users/:id" component={UsersShow}/>
 
           <Route exact path="/trips/new" component={TripsContainer}/>
-          <Route exact path="/trips" component={TripsContainer}/>
+          <Route exact path="/trips" render={(props) => <TripsContainer props={props}/>}/>
           <Route exact path="/trips/:id" component={TripShow}/>
           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
         </Switch>
@@ -37,3 +37,4 @@ class App extends Component {
 export default App;
 
           // <Route exact path="/" component={Home}/>
+          // <Route exact path="/login" component={LoginForm}/>

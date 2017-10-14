@@ -17,7 +17,8 @@ class LoginForm extends React.Component {
       password: this.state.password
     }
     this.props.loginUser(loginParams)
-    window.history.push('/home')
+    console.log(this.props.history)
+    debugger
   }
 
   handleEmailChange = (event) => {
@@ -33,6 +34,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    console.log(this)
     if (localStorage.getItem('jwtToken')) {
       return <Redirect to="/" />
     } else {

@@ -16,7 +16,7 @@ class TripShow extends React.Component {
 	}
 
 	onClick = (event) => {
-		const tripId = event.target.id
+		const tripId = parseInt(event.target.id)
 		this.props.requestJoin(tripId)
 		// on click send request to driver
 	}

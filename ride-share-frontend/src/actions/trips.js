@@ -70,11 +70,12 @@ function showPage(trip) {
 
 
 export function requestJoin(trip) {
+  const jwtDecode = require('jwt-decode')
   const token = localStorage.getItem("jwtToken")
-  const body = JSON.stringify(trip)
-  debugger
+  const userId = jwtDecode(token)
+  const body = JSON.stringify({trip, ...userId})
   return function(dispatch) {
-    fetch(`http://localhost:3000/requests/new`, {
+    fetch(`http://localhost:3000/usertrips/create`, {
       method: "POST",
       headers: {
         'Accept': 'application/json',
