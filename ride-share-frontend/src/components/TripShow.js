@@ -21,35 +21,28 @@ class TripShow extends React.Component {
 	onClick = (event) => {
 		const tripId = parseInt(event.target.id)
 		this.props.requestJoin(tripId)
-		// redirect back to user show page
 	}
 
 	render() {
-		console.log("TripShow this.props", this.props)
-
-		const thisTrip = (this.props.trips.trips.thisTrip)
-
-		if (thisTrip && localStorage.getItem('jwtToken')) {
+		if (this.props.thisTrip) {
 			return(
+		 
 				<div className="trip">
 					<div className="trip-origin">
-						Origin:  {thisTrip.origin}
+						Origin:  {this.props.thisTrip.origin}
 					</div>
 					<div className="trip-destination">
-						Destination: {thisTrip.destination}
+						Destination: {this.props.thisTrip.destination}
 					</div>
 					<div className="trip-user">
-						Driver: <Link to={`users/${thisTrip.driver.id}`}> {thisTrip.driver.name} </Link>
+						Driver: <Link to={`users/${this.props.thisTrip.driver.id}`}> {this.props.thisTrip.driver.name} </Link>
 					</div>
-					<button id={thisTrip.id} onClick={this.onClick}> Join Trip </button>
+					<button id={this.props.thisTrip.id} onClick={this.onClick}> Join Trip </button>
 				</div>
+				
 			)
-		} else if (thisTrip) {
-			<div> loader page </div>
 		}
-		return(
-			<Redirect to='/login' />
-		)
+		return <div> loader page </div>
 	}
 }
 
@@ -66,7 +59,10 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
 	return {
-		trips: state
+		trips: state.trips.list,
+		thisTrip: state.trips.thisTrip,
+		userTrips: state.userTrips.list,
+		users: state.users
 	}
 }
 

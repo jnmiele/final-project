@@ -35,7 +35,7 @@ class App extends Component {
 
           <Route exact path="/trips/new" render={(props) => <TripsContainer props={props}/>}/>
           <Route exact path="/trips" render={(props) => <TripsContainer props={props}/>}/>
-          <Route exact path="/trips/:id" component={TripShow}/>
+          <Route exact path="/trips/:id" component={TripShow} />
           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
         </Switch>
       </div>
@@ -53,6 +53,50 @@ class App extends Component {
 
 export default App;
 // export default connect(null, mapDispatchToProps)(App);
+
+
+
+
+
+// const AuthorizedTripsContainer = Authorize(TripsContainer)
+//     const AuthorizedSignupForm = Authorize(SignupForm)
+//     const AuthorizedLoginForm = Authorize(LoginForm)
+//     const AuthorizedUsersShow = Authorize(UsersShow)
+//     const AuthorizedTripShow = Authorize(TripShow)
+//     const AuthorizedHome = Authorize(Home)
+
+//     return (
+//       <div className="App">
+//         <NavBar />
+//         <Switch>
+//           <Route exact path="/" render={(props) => <AuthorizedHome props={props} />}/>
+//           <Route exact path="/signup" component={AuthorizedSignupForm}/>
+//           <Route exact path="/login" component={AuthorizedLoginForm}/>
+//           <Route exact path="/users/:id" render={(props) => <AuthorizedUsersShow props={props}/>}/>
+
+//           <Route exact path="/trips/new" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
+//           <Route exact path="/trips" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
+//           <Route exact path="/trips/:id" component={AuthorizedTripShow}/>
+//           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
+//         </Switch>
+//       </div>
+//     );
+//   }
+// }
+// render={(props) => <TripShow props={props}/>}/>
+// // function mapDispatchToProps(dispatch) {
+// //   return {
+// //     setUser: (token) => {
+// //       dispatch(setUser(token))
+// //     }
+// //   }
+// // }
+
+// export default App;
+// // export default connect(null, mapDispatchToProps)(App);
+
+
+
 
 
 

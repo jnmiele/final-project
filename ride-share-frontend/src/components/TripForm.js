@@ -2,7 +2,6 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createTrip } from '../actions/trips'
-import { setUser } from '../actions/users'
 
 
 class TripForm extends React.Component {
@@ -14,19 +13,9 @@ class TripForm extends React.Component {
     time: null
   }
 
-  componentDidMount() {
-    const token = localStorage.getItem('jwtToken')
-    this.props.setUser(token)
-  }
-
   handleSubmit = (event) => {
     event.preventDefault()
-    const jwtDecode = require('jwt-decode')
-    const token = localStorage.getItem("jwtToken")
-    const userId = jwtDecode(token)
-    const tripParams = {
-      ...this.state, user: userId
-    }
+    const tripParams = {...this.state}
     this.props.createTrip(tripParams)
     this.props.props.history.push('/trips')
   }
@@ -80,9 +69,6 @@ function mapDispatchToProps(dispatch) {
   return {
     createTrip: (tripParams) => {
       dispatch(createTrip(tripParams))
-    },
-    setUser: (token) => {
-      dispatch(setUser(token))
     }
   }
 }

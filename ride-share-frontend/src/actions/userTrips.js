@@ -1,7 +1,4 @@
 export function requestJoin(trip) {
-
-  // move decryption to backend
-  
   const token = localStorage.getItem("jwtToken")
   const body = JSON.stringify({trip, jwt: token})
   return function(dispatch) {

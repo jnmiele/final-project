@@ -2,8 +2,9 @@ class TripsController < ApplicationController
 	skip_before_action :authorized, only: [:show]
 
 	def create
+		token = decoded_token # => [{"user_id"=> int}, {"alg"=>"HS256"}]
 		@trip = Trip.create(trip_params)
-    @user = User.find(params[:user][:user_id])
+    @user = User.find(token[0]['user_id'])
     UserTrip.create(user: @user, trip: @trip, role: "Driver")
     render json: @trip
 	end
