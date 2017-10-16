@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 
 import {fetchAllTrips } from '../actions/trips'
 import {fetchAllUserTrips } from '../actions/userTrips'
-import { setUser } from '../actions/users'
-import LoginForm from './LoginForm'
 import TripForm from './TripForm'
 import TripsList from './TripsList'
 
@@ -41,9 +39,6 @@ class TripsContainer extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setUser: (token) => {
-      dispatch(setUser(token))
-    },
     fetchAllTrips: (token) => {
     	dispatch(fetchAllTrips(token))
     },

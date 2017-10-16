@@ -12,9 +12,9 @@ class UsersShow extends React.Component {
 	}
 
 	render() {
-		debugger
-		if (this.props && this.props.user.showUser) {
-			const thisUser = (this.props.users.showUser)
+		console.log("UserShow this.props", this.props)
+		if (this.props.user !== undefined && this.props.user.showUser !== undefined) {
+			const thisUser = (this.props.user.showUser)
 			return(
 				<div className="user">
 					email: {thisUser.email}<br/>

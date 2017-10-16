@@ -5,7 +5,13 @@ import { Card, Image } from 'semantic-ui-react'
 
 const Trip = (props) => {
 	const tripShowURL = `trips/${props.id}`
-	const userShowURL = `users/${props.id}`
+	const driverShowURL = `users/${props.driver.id}`
+
+	const confirmedPassengers = function confirmedPassengers(passengers) {
+		props.passengers.filter(passenger => {
+			passenger.confirmed === true
+		})
+	}
 	return(
 		<Card>
 			<Image src="placeholder" />
@@ -17,7 +23,7 @@ const Trip = (props) => {
 					Date: {props.date} No Date Bro
 				</Card.Meta>
 				<Card.Description>
-					Driver:<Link to={userShowURL}> {props.driver.name} </Link><br/>
+					Driver:<Link to={driverShowURL}> {props.driver.name} </Link><br/>
 					Passengers: {props.passengers.length}
 				</Card.Description>
 			</Card.Content>

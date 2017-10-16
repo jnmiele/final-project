@@ -1,10 +1,13 @@
 class UserTripsController < ApplicationController
 
 	def create
+		
+		token = decoded_token # => [{"user_id"=> int}, {"alg"=>"HS256"}]
+
 		@u = UserTrip.find_or_create_by(
-			user_id: params[:user_id],
+			user_id: token[0]['user_id'],
 			trip_id: params[:trip],
-			role: "Passenger"
+			role: 'Passenger'
 		)
 		if @u.save
 			render json: {
@@ -21,7 +24,7 @@ class UserTripsController < ApplicationController
 				UserTrip: @u
 			}
 		else
-    	render json: { message: "Error"}
+    	render json: { message: 'Error'}
   	end
 	end
 

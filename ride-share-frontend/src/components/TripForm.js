@@ -15,7 +15,8 @@ class TripForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setUser()
+    const token = localStorage.getItem('jwtToken')
+    this.props.setUser(token)
   }
 
   handleSubmit = (event) => {
@@ -80,8 +81,8 @@ function mapDispatchToProps(dispatch) {
     createTrip: (tripParams) => {
       dispatch(createTrip(tripParams))
     },
-    setUser: () => {
-      dispatch(setUser())
+    setUser: (token) => {
+      dispatch(setUser(token))
     }
   }
 }

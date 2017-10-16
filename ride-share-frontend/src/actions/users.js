@@ -26,7 +26,10 @@ export function loginUser(params) {
       body: body
     })
     .then(res => res.json())
-    .then(res => dispatch(doLogin(res)))
+    .then(res => {
+      dispatch(doLogin(res))
+      localStorage.setItem('jwtToken', res.jwt)
+    })
   }
 }
 
@@ -49,8 +52,8 @@ export function show(user) {
         'Authorization': `${token}`
       }
     })
-    .then(res => res.json())
-    .then(res => dispatch(showUser(res)))
+    .then(userInfo => userInfo.json())
+    .then(userInfo => dispatch(showUser(userInfo)))
   }
 }
 
@@ -63,8 +66,29 @@ function showUser(user) {
 
 
 
-export function setUser() {
-  return function(dispatch) {
-   
-  }
-}
+// export function setUser(token) {
+
+//   // move decryption to backend
+//   const jwtDecode = require('jwt-decode')
+//   const userObj = jwtDecode(token)
+//   const userId = userObj.user_id
+
+//   return function(dispatch) {
+//    fetch(`http://localhost:3000/users/${userId}`, {
+//     method: "GET",
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json',
+//       'Authorization': `${token}`
+//     }
+//    })
+//    .then(user => user.json())
+//    .then(user => dispatch(set(user)))
+//   }
+// }
+
+// function set(user) {
+//   return {
+//     type: "SET_USER",
+//     payload: user
+//   }

@@ -1,8 +1,9 @@
 export function requestJoin(trip) {
-  const jwtDecode = require('jwt-decode')
+
+  // move decryption to backend
+  
   const token = localStorage.getItem("jwtToken")
-  const userId = jwtDecode(token)
-  const body = JSON.stringify({trip, ...userId})
+  const body = JSON.stringify({trip, jwt: token})
   return function(dispatch) {
     fetch(`http://localhost:3000/usertrips/create`, {
       method: "POST",

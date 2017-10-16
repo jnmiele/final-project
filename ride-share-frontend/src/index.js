@@ -10,6 +10,8 @@ import usersReducer from './reducers/usersReducer'
 import userTripsReducer from './reducers/userTripsReducer'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
+import {persistStore, autoRehydrate} from 'redux-persist'
+
 
 const rootReducer = combineReducers({
 	users: usersReducer, 
@@ -17,8 +19,9 @@ const rootReducer = combineReducers({
 	userTrips: userTripsReducer
 })
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk), autoRehydrate());
 
+persistStore(store)
 
 ReactDOM.render(<Provider store={store}><Router><App /></Router></Provider>, document.getElementById('root'));
 registerServiceWorker();

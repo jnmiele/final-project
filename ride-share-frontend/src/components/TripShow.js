@@ -6,6 +6,8 @@ import { showTrip } from '../actions/trips'
 import { requestJoin } from '../actions/userTrips'
 
 /* ADD A TERNARY OPERATOR FOR THE BUTTON THAT CHECKS CURRENTUSER.ID VS TRIP.DRIVER.ID VS TRIP.PASSENGERS.ID */
+/* IF USER.userTrips.find(thisUserTrip) { abandon trip : display join trip}  */
+/* abandon trip : { can add another ternary here that offers abandon ONLY IF ACCEPTED }  */
 
 
 
@@ -23,8 +25,9 @@ class TripShow extends React.Component {
 	}
 
 	render() {
+		console.log("TripShow this.props", this.props)
+
 		const thisTrip = (this.props.trips.trips.thisTrip)
-		console.log(this.props)
 
 		if (thisTrip && localStorage.getItem('jwtToken')) {
 			return(
@@ -62,7 +65,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-	debugger
 	return {
 		trips: state
 	}

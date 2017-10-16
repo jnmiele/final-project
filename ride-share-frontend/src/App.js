@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Home from './components/Home'
 import LoginForm from './components/LoginForm'
 import NavBar from './components/NavBar'
@@ -9,10 +10,18 @@ import SignupForm from './components/SignupForm'
 import TripsContainer from './components/TripsContainer'
 import TripShow from './components/TripShow'
 import UsersShow from './components/UsersShow'
+import { setUser } from './actions/users'
 
 
 
 class App extends Component {
+
+  // componentDidMount() {
+  //   if (localStorage.getItem('jwtToken')){
+  //     const token = localStorage.getItem('jwtToken')
+  //     this.props.setUser(token)
+  //   }
+  // }
 
   render() {
     return (
@@ -34,4 +43,21 @@ class App extends Component {
   }
 }
 
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     setUser: (token) => {
+//       dispatch(setUser(token))
+//     }
+//   }
+// }
+
 export default App;
+// export default connect(null, mapDispatchToProps)(App);
+
+
+
+
+
+
+
+
