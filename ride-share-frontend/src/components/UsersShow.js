@@ -12,7 +12,6 @@ class UsersShow extends React.Component {
 	}
 
 	render() {
-		console.log("UserShow this.props", this.props)
 		if (this.props.user !== undefined && this.props.user.showUser !== undefined) {
 			const thisUser = (this.props.user.showUser)
 			return(

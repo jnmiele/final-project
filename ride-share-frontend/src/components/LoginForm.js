@@ -11,6 +11,7 @@ class LoginForm extends React.Component {
   }
 
   confirmLogin() {
+    debugger
     setTimeout(() => {
       if (this.props.currentUser.loggedIn === true) {
         return this.props.history.push('/trips')
@@ -28,6 +29,7 @@ class LoginForm extends React.Component {
       password: this.state.password
     }
     this.props.loginUser(loginParams)
+    console.log(this)
     this.confirmLogin()
   }
 
@@ -44,9 +46,6 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    if (localStorage.getItem('jwtToken')) {
-      return <Redirect to="/" />
-    }
     return (
       <div className="container">
         <h1> Looks like you need to sign in... </h1>

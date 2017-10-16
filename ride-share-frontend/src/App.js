@@ -11,6 +11,7 @@ import TripsContainer from './components/TripsContainer'
 import TripShow from './components/TripShow'
 import UsersShow from './components/UsersShow'
 import { setUser } from './actions/users'
+import Authorize from './components/Authorize'
 
 
 
@@ -24,18 +25,25 @@ class App extends Component {
   // }
 
   render() {
+    const AuthorizedTripsContainer = Authorize(TripsContainer)
+    const AuthorizedSignupForm = Authorize(SignupForm)
+    const AuthorizedLoginForm = Authorize(LoginForm)
+    const AuthorizedUsersShow = Authorize(UsersShow)
+    const AuthorizedTripShow = Authorize(TripShow)
+    const AuthorizedHome = Authorize(Home)
+
     return (
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path="/" render={(props) => <Home props={props} />}/>
-          <Route exact path="/signup" component={SignupForm}/>
-          <Route exact path="/login" component={LoginForm}/>
-          <Route exact path="/users/:id" render={(props) => <UsersShow props={props}/>}/>
+          <Route exact path="/" render={(props) => <AuthorizedHome props={props} />}/>
+          <Route exact path="/signup" component={AuthorizedSignupForm}/>
+          <Route exact path="/login" component={AuthorizedLoginForm}/>
+          <Route exact path="/users/:id" render={(props) => <AuthorizedUsersShow props={props}/>}/>
 
-          <Route exact path="/trips/new" render={(props) => <TripsContainer props={props}/>}/>
-          <Route exact path="/trips" render={(props) => <TripsContainer props={props}/>}/>
-          <Route exact path="/trips/:id" component={TripShow} />
+          <Route exact path="/trips/new" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
+          <Route exact path="/trips" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
+          <Route exact path="/trips/:id" component={AuthorizedTripShow}/>
           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
         </Switch>
       </div>
@@ -58,31 +66,7 @@ export default App;
 
 
 
-// const AuthorizedTripsContainer = Authorize(TripsContainer)
-//     const AuthorizedSignupForm = Authorize(SignupForm)
-//     const AuthorizedLoginForm = Authorize(LoginForm)
-//     const AuthorizedUsersShow = Authorize(UsersShow)
-//     const AuthorizedTripShow = Authorize(TripShow)
-//     const AuthorizedHome = Authorize(Home)
 
-//     return (
-//       <div className="App">
-//         <NavBar />
-//         <Switch>
-//           <Route exact path="/" render={(props) => <AuthorizedHome props={props} />}/>
-//           <Route exact path="/signup" component={AuthorizedSignupForm}/>
-//           <Route exact path="/login" component={AuthorizedLoginForm}/>
-//           <Route exact path="/users/:id" render={(props) => <AuthorizedUsersShow props={props}/>}/>
-
-//           <Route exact path="/trips/new" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
-//           <Route exact path="/trips" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
-//           <Route exact path="/trips/:id" component={AuthorizedTripShow}/>
-//           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
-//         </Switch>
-//       </div>
-//     );
-//   }
-// }
 // render={(props) => <TripShow props={props}/>}/>
 // // function mapDispatchToProps(dispatch) {
 // //   return {
