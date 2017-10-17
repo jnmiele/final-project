@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { showTrip } from '../actions/trips'
 import { requestJoin } from '../actions/userTrips'

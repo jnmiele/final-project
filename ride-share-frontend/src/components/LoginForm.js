@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { loginUser } from '../actions/users'
@@ -11,7 +10,6 @@ class LoginForm extends React.Component {
   }
 
   confirmLogin() {
-    debugger
     setTimeout(() => {
       if (this.props.currentUser.loggedIn === true) {
         return this.props.history.push('/trips')
@@ -29,7 +27,6 @@ class LoginForm extends React.Component {
       password: this.state.password
     }
     this.props.loginUser(loginParams)
-    console.log(this)
     this.confirmLogin()
   }
 

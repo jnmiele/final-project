@@ -4,13 +4,13 @@ class UsersController < ApplicationController
 	def create
 	  user = User.new(
       email: params[:email], 
-      name: params[:name].join(" "),
+      name: params[:name].join(' '),
       password: params[:password])
     if user.save
       token = encode_token({ user_id: user.id})
       render json: {user_id: user.id, user_name: user.name, jwt: token}
     else
-    	render json: { message: "Error"}
+    	render json: { message: 'Error'}
     end
 	end
 
@@ -21,6 +21,12 @@ class UsersController < ApplicationController
     else
       render json: { message: "Error"}
     end
+  end
+
+  def me
+    token = decoded_token # => [{"user_id"=> int}, {"alg"=>"HS256"}]
+    @user = User.find(token[0]['user_id'])
+    render json: @user
   end
 
 end

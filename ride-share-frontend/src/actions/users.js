@@ -65,30 +65,24 @@ function showUser(user) {
 }
 
 
+export function setCurrentUser(token) {
+  return function(dispatch) {
+   fetch(`http://localhost:3000/me`, {
+    method: "GET",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`
+    }
+   })
+   .then(user => user.json())
+   .then(user => dispatch(set(user)))
+  }
+}
 
-// export function setUser(token) {
-
-//   // move decryption to backend
-//   const jwtDecode = require('jwt-decode')
-//   const userObj = jwtDecode(token)
-//   const userId = userObj.user_id
-
-//   return function(dispatch) {
-//    fetch(`http://localhost:3000/users/${userId}`, {
-//     method: "GET",
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json',
-//       'Authorization': `${token}`
-//     }
-//    })
-//    .then(user => user.json())
-//    .then(user => dispatch(set(user)))
-//   }
-// }
-
-// function set(user) {
-//   return {
-//     type: "SET_USER",
-//     payload: user
-//   }
+function set(user) {
+  return {
+    type: "SET_CURRENT_USER",
+    payload: user
+  }
+}

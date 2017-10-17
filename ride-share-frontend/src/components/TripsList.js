@@ -20,6 +20,7 @@ const TripsList = (props) => {
 
 
 function mapStateToProps(state){
+	debugger
 	return {
 		trips: state.trips.list
 	}

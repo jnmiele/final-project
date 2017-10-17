@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
 import Home from './components/Home'
 import LoginForm from './components/LoginForm'
 import NavBar from './components/NavBar'
 import SignupForm from './components/SignupForm'
 import TripsContainer from './components/TripsContainer'
 import TripShow from './components/TripShow'
+import UserProfile from './components/UserProfile'
 import UsersShow from './components/UsersShow'
-import { setUser } from './actions/users'
+// import { setUser } from './actions/users'
 import Authorize from './components/Authorize'
 
 
@@ -37,6 +37,7 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route exact path="/" render={(props) => <AuthorizedHome props={props} />}/>
+          <Route exact path="/me" component={UserProfile}/>
           <Route exact path="/signup" component={AuthorizedSignupForm}/>
           <Route exact path="/login" component={AuthorizedLoginForm}/>
           <Route exact path="/users/:id" render={(props) => <AuthorizedUsersShow props={props}/>}/>
@@ -61,31 +62,3 @@ class App extends Component {
 
 export default App;
 // export default connect(null, mapDispatchToProps)(App);
-
-
-
-
-
-
-// render={(props) => <TripShow props={props}/>}/>
-// // function mapDispatchToProps(dispatch) {
-// //   return {
-// //     setUser: (token) => {
-// //       dispatch(setUser(token))
-// //     }
-// //   }
-// // }
-
-// export default App;
-// // export default connect(null, mapDispatchToProps)(App);
-
-
-
-
-
-
-
-
-
-
-

@@ -12,6 +12,15 @@ const Trip = (props) => {
 			passenger.confirmed === true
 		})
 	}
+
+	const passengers = () => {
+		if (this.props.passengers) {
+			return this.props.passengers.length
+		}
+		return 0
+	}
+
+
 	return(
 		<Card>
 			<Image src="placeholder" />
@@ -24,7 +33,7 @@ const Trip = (props) => {
 				</Card.Meta>
 				<Card.Description>
 					Driver:<Link to={driverShowURL}> {props.driver.name} </Link><br/>
-					Passengers: {props.passengers.length}
+					Passengers: {passengers}
 				</Card.Description>
 			</Card.Content>
 			<Card.Content extra>

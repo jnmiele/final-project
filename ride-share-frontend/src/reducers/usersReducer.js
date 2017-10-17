@@ -9,6 +9,10 @@ function usersReducer(state = {currentUser: {id: "", name: "", loggedIn: localSt
 			const showUser = action.payload
 			return state = {...state, showUser: showUser}
 
+		case "SET_CURRENT_USER":
+			const setCurrentUser = action.payload
+			return state = {...state, currentUser: setCurrentUser}
+
 		default:
 			return state
 	}
