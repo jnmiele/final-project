@@ -1,8 +1,8 @@
 export function createUser(userParams) {
   const body = JSON.stringify(userParams)
   return function(dispatch) {
-  	fetch("http://localhost:3000/signup", {
-    method: "POST",
+  	fetch('http://localhost:3000/signup', {
+    method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -17,8 +17,8 @@ export function createUser(userParams) {
 export function loginUser(params) {
   const body = JSON.stringify(params)
   return function(dispatch) {
-    fetch("http://localhost:3000/login", {
-      method: "POST",
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -35,17 +35,17 @@ export function loginUser(params) {
 
 function doLogin(params) {
   return {
-    type: "LOGIN_USER",
+    type: 'LOGIN_USER',
     payload: params
   }
 }
 
 
 export function show(user) {
-  const token = localStorage.getItem("jwtToken")
+  const token = localStorage.getItem('jwtToken')
   return function(dispatch) {
     fetch(`http://localhost:3000${user}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export function show(user) {
 
 function showUser(user) {
   return {
-    type: "SHOW_USER",
+    type: 'SHOW_USER',
     payload: user
   }
 }
@@ -68,7 +68,7 @@ function showUser(user) {
 export function setCurrentUser(token) {
   return function(dispatch) {
    fetch(`http://localhost:3000/me`, {
-    method: "GET",
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -82,7 +82,15 @@ export function setCurrentUser(token) {
 
 function set(user) {
   return {
-    type: "SET_CURRENT_USER",
+    type: 'SET_CURRENT_USER',
     payload: user
+  }
+}
+
+
+export function logoutUser() {
+  return {
+    type: 'LOGOUT_USER',
+    payload: 'loogout'
   }
 }

@@ -7,19 +7,14 @@ const Trip = (props) => {
 	const tripShowURL = `trips/${props.id}`
 	const driverShowURL = `users/${props.driver.id}`
 
-	const confirmedPassengers = function confirmedPassengers(passengers) {
-		props.passengers.filter(passenger => {
-			passenger.confirmed === true
-		})
-	}
-
-	const passengers = () => {
-		if (this.props.passengers) {
-			return this.props.passengers.length
+	 function confirmedPassengers() {
+		if (props.passengers) {
+			props.passengers.filter(passenger => {
+				return passenger.confirmed === true
+			})
 		}
 		return 0
 	}
-
 
 	return(
 		<Card>
@@ -33,7 +28,9 @@ const Trip = (props) => {
 				</Card.Meta>
 				<Card.Description>
 					Driver:<Link to={driverShowURL}> {props.driver.name} </Link><br/>
-					Passengers: {passengers}
+				</Card.Description>
+				<Card.Description>
+					Passengers: {confirmedPassengers()}
 				</Card.Description>
 			</Card.Content>
 			<Card.Content extra>
@@ -44,3 +41,4 @@ const Trip = (props) => {
 }
 
 export default Trip
+
