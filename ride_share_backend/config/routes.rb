@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   get '/trips', to: 'trips#index'
 
   post '/usertrips/create', to: 'user_trips#create'
+  get '/usertrips/:id', to: 'user_trips#show'
+  patch '/usertrips/:id/edit', to: 'user_trips#edit'
   get '/usertrips', to: 'user_trips#index'
 end

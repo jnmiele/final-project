@@ -26,7 +26,7 @@ class UserProfile extends React.Component {
     return <div> You have no completed trips! </div>
   }
 
-   pendingTrips = () => {
+  pendingTrips = () => {
     if (this.props.currentUser.trips && this.props.currentUser.trips.length > 0) {
       let pendingTrips = this.props.currentUser.trips
       pendingTrips = pendingTrips.filter(trip => !trip.completed)
@@ -47,9 +47,10 @@ class UserProfile extends React.Component {
       awaitingApproval.forEach(trip => {
         trip.user_trips.forEach(ut => requests.push(ut))
       })
-      
+
       requests = requests.filter(req => req.role === "Passenger")
-      requests = requests.map((req, index) => <UserProfileTripRequest key={index} tripId={req.trip_id} userId={req.user_id} role={req.role} />)
+      console.log(requests)
+      requests = requests.map((req, index) => <UserProfileTripRequest key={index} id={req.id} userId={req.user_id} role={req.role} />)
       return requests
     }
     return <div> You have no passenger requests at this time. </div>

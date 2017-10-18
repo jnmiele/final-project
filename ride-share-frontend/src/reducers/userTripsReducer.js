@@ -9,6 +9,14 @@ function tripsReducer(state = {list: []}, action) {
 			const trips = action.payload
 			return Object.assign({}, state, {list: trips })
 
+		case "REQ_TRIP_INFO":
+			const tripInfo = action.payload
+			return state = {...state, tripInfo}
+
+		case "ACCEPT_PASSENGER":
+			const userTrip = action.payload
+			return state
+
 		default:
 			return state
 	}

@@ -31,13 +31,14 @@ class App extends Component {
     const AuthorizedUsersShow = Authorize(UsersShow)
     const AuthorizedTripShow = Authorize(TripShow)
     const AuthorizedHome = Authorize(Home)
+    const AuthorizedUserProfile = Authorize(UserProfile)
 
     return (
       <div className="App">
         <NavBar />
         <Switch>
           <Route exact path="/" render={(props) => <AuthorizedHome props={props} />}/>
-          <Route exact path="/me" component={UserProfile}/>
+          <Route exact path="/me" component={AuthorizedUserProfile}/>
           <Route exact path="/signup" component={AuthorizedSignupForm}/>
           <Route exact path="/login" component={AuthorizedLoginForm}/>
           <Route exact path="/users/:id" render={(props) => <AuthorizedUsersShow props={props}/>}/>
