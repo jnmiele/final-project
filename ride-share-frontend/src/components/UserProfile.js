@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Trip from './Trip'
+import UserProfileTripRequest from './UserProfileTripRequest'
 import { setCurrentUser } from '../actions/users'
 
 import { Grid, Card } from 'semantic-ui-react'
@@ -16,7 +17,7 @@ class UserProfile extends React.Component {
   }
 
   completedTrips = () => {
-    if (this.props.trips && this.props.trips.length > 0) {
+    if (this.props.currentUser.trips && this.props.currentUser.trips.length > 0) {
       let completedTrips = this.props.currentUser.trips
       completedTrips = completedTrips.filter(trip => trip.completed)
       completedTrips = completedTrips.map((trip, index) => <Trip key={index} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers}/>)
@@ -26,14 +27,32 @@ class UserProfile extends React.Component {
   }
 
    pendingTrips = () => {
-    if (this.props.trips && this.props.trips.length > 0) {
+    if (this.props.currentUser.trips && this.props.currentUser.trips.length > 0) {
       let pendingTrips = this.props.currentUser.trips
-      debugger
       pendingTrips = pendingTrips.filter(trip => !trip.completed)
       pendingTrips = pendingTrips.map((trip, index) => <Trip key={index} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers}/>)
       return pendingTrips
     }
     return <div> You have no completed trips! </div>
+  }
+
+  awaitingApproval = () => { // needs major refactoring
+    if (this.props.currentUser.trips && this.props.currentUser.trips.length > 0) {
+
+      let awaitingApproval = this.props.currentUser.trips
+      awaitingApproval = awaitingApproval.filter(trip => trip.driver.id === this.props.currentUser.id)
+
+      let requests = []
+
+      awaitingApproval.forEach(trip => {
+        trip.user_trips.forEach(ut => requests.push(ut))
+      })
+      
+      requests = requests.filter(req => req.role === "Passenger")
+      requests = requests.map((req, index) => <UserProfileTripRequest key={index} tripId={req.trip_id} userId={req.user_id} role={req.role} />)
+      return requests
+    }
+    return <div> You have no passenger requests at this time. </div>
   }
 
 	render() {
@@ -50,7 +69,7 @@ class UserProfile extends React.Component {
             <h3> And who knows what will go here.... </h3>
           </Grid.Column>
         </Grid>
-  			<Grid columns={2} divided>
+  			<Grid columns={3} divided>
   				<Grid.Column>
   					<h3> Completed Trips </h3>
             <Card.Group>
@@ -61,6 +80,12 @@ class UserProfile extends React.Component {
   					<h3> Pending Trips </h3>
             <Card.Group>
   						{this.pendingTrips()}
+            </Card.Group>
+          </Grid.Column>
+          <Grid.Column>
+            <h3> Awaiting Your Approval </h3>
+            <Card.Group>
+              {this.awaitingApproval()}
             </Card.Group>
           </Grid.Column>
   			</Grid>
@@ -78,8 +103,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
 	return {
-		currentUser: state.users.currentUser,
-    trips: state.users.currentUser.trips
+		currentUser: state.users.currentUser
 	}
 }
 

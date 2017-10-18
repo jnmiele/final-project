@@ -1,4 +1,4 @@
-const initialState = {currentUser: {id: ', name: ', loggedIn: localStorage.getItem('jwtToken') ? true : false}}
+const initialState = {currentUser: {id: '', name: '', loggedIn: localStorage.getItem('jwtToken') ? true : false}}
 
 function usersReducer(state = initialState, action) {
 	

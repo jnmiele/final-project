@@ -76,8 +76,8 @@ export function setCurrentUser(token) {
     }
    })
    .then(user => user.json())
-   .then(user => dispatch(set(user)))
-  }
+   .then(user => dispatch(set(user))
+  )}
 }
 
 function set(user) {

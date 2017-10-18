@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { showTrip } from '../actions/trips'
+import { setCurrentUser } from '../actions/users'
 import { requestJoin } from '../actions/userTrips'
 
 /* ADD A TERNARY OPERATOR FOR THE BUTTON THAT CHECKS CURRENTUSER.ID VS TRIP.DRIVER.ID VS TRIP.PASSENGERS.ID */
@@ -16,6 +17,12 @@ class TripShow extends React.Component {
 	componentDidMount(){
 		const showURL = (this.props.location.pathname)
 		this.props.showTrip(showURL)
+		setTimeout(() => {
+			if (localStorage.getItem('jwtToken')){
+	      const token = localStorage.getItem('jwtToken')
+	      this.props.setCurrentUser(token)
+	    }
+		}, 300)
 	}
 
 	onClick = (event) => {
@@ -23,10 +30,43 @@ class TripShow extends React.Component {
 		this.props.requestJoin(tripId)
 	}
 
+	listPassengers = () => {
+		let passengers = this.props.thisTrip.passengers.forEach(passenger => {
+			return passenger.name
+		})
+	}
+
+	checkIfJoined = () => {
+		if (this.props.currentUser.id !== 0) {
+			const passengers = this.props.thisTrip.passengers
+			const userId = this.props.currentUser.id
+			{passengers.find(p => p.id === userId)? true:false}
+		}
+	}
+
+  displayButton = () => {
+    if (this.props.currentUser.id === this.props.thisTrip.driver.id) {
+    	return (
+    		<div> 
+    			Looks like you're driving!<br/>
+    			<div>
+    				Passenger Requests:<br/>
+    				{this.props.thisTrip.passengers > 0 ? this.listPassengers() : "Looks like there's no requests to join your trip right now..."}
+    			</div>
+    		</div>
+    	)
+    } else if (this.props.currentUser.id !== this.props.thisTrip.driver.id) {
+    	if (this.checkIfJoined() === true) {
+    		return <div> looks like you already joined this trip </div>
+    	}
+    	return <button id={this.props.thisTrip.id} onClick={this.onClick}> Join Trip </button>
+    }
+  }
+
 	render() {
+		console.log(this.props.thisTrip)
 		if (this.props.thisTrip) {
 			return(
-		 
 				<div className="trip">
 					<div className="trip-origin">
 						Origin:  {this.props.thisTrip.origin}
@@ -37,7 +77,8 @@ class TripShow extends React.Component {
 					<div className="trip-user">
 						Driver: <Link to={`users/${this.props.thisTrip.driver.id}`}> {this.props.thisTrip.driver.name} </Link>
 					</div>
-					<button id={this.props.thisTrip.id} onClick={this.onClick}> Join Trip </button>
+					<br/>
+					{this.displayButton()}
 				</div>
 				
 			)
@@ -53,16 +94,17 @@ function mapDispatchToProps(dispatch) {
     },
     requestJoin: (trip) => {
     	dispatch(requestJoin(trip))
+    },
+    setCurrentUser: (token) => {
+    	dispatch(setCurrentUser(token))
     }
   }
 }
 
 function mapStateToProps(state) {
 	return {
-		trips: state.trips.list,
 		thisTrip: state.trips.thisTrip,
-		userTrips: state.userTrips.list,
-		users: state.users
+		currentUser: state.users.currentUser
 	}
 }
 

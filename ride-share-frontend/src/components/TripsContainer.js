@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import {fetchAllTrips } from '../actions/trips'
-import {fetchAllUserTrips } from '../actions/userTrips'
 import TripForm from './TripForm'
 import TripsList from './TripsList'
 
@@ -41,9 +40,6 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchAllTrips: (token) => {
     	dispatch(fetchAllTrips(token))
-    },
-    fetchAllUserTrips: (token) => {
-    	dispatch(fetchAllUserTrips(token))
     }
   }
 }

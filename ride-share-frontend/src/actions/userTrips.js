@@ -22,25 +22,3 @@ function sendReq(trip) {
     payload: trip
   }
 }
-
-export function fetchAllUserTrips(token) {
-  return function(dispatch) {
-    fetch("http://localhost:3000/usertrips/", {
-      method: "GET",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `${token}`
-      }
-    })
-    .then(res => res.json())
-    .then(res => dispatch(allUserTrips(res)))
-  }
-}
-
-function allUserTrips(params) {
-  return {
-    type: "FETCH_ALL_USER_TRIPS",
-    payload: params
-  }
-}
