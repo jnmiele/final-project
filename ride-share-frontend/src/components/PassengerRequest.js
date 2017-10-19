@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Card, Button } from 'semantic-ui-react'
 
-import { requestDetails, acceptPassenger, declinePassenger } from '../actions/userTrips'
+import { acceptPassenger, declinePassenger } from '../actions/userTrips'
 
-class UserProfilePassengerRequest extends React.Component {
+class PassengerRequest extends React.Component {
 
 	handleAccept = (event) => {
 		event.preventDefault()
@@ -15,7 +15,17 @@ class UserProfilePassengerRequest extends React.Component {
 
 	handleDecline = (event) => {
 		event.preventDefault()
-		console.log(event.target.id)
+		this.props.declinePassenger(event.target.id)
+	}
+
+	checkIfJoined() {
+  if (this.props.currentUser.id !== 0) {
+    const passengers = this.props.thisTrip.passengers
+    const userId = this.props.currentUser.id
+	    if (passengers.find(p => p.id === userId)) {
+	      return true
+	    }
+	  }
 	}
 
 	render() {
@@ -53,8 +63,11 @@ function mapDispatchToProps(dispatch) {
 	return {
 		acceptPassenger: (id) => {
 			dispatch(acceptPassenger(id))
+		},
+		declinePassenger: (id) => {
+			dispatch(declinePassenger(id))
 		}
 	}
 }
 
-export default connect(null, mapDispatchToProps)(UserProfilePassengerRequest)
+export default connect(null, mapDispatchToProps)(PassengerRequest)

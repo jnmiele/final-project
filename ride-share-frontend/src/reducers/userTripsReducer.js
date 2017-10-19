@@ -17,7 +17,7 @@ function tripsReducer(state = {list: []}, action) {
 			let userTrip = state.all.find(n => n.id === action.payload.id)
 			userTrip.confirmed = true
 			return state
-
+			
 		default:
 			return state
 	}

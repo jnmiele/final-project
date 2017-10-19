@@ -1,10 +1,8 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { Grid, Card } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
-import { setCurrentUser } from '../actions/users'
 
 import Trip from './Trip'
 

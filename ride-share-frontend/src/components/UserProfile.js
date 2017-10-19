@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 
 import UserProfileCompletedTripsContainer from './UserProfileCompletedTripsContainer'
 import UserProfilePendingTripsContainer from './UserProfilePendingTripsContainer'
-import UserProfilePassengerRequestContainer from './UserProfilePassengerRequestContainer'
+import PassengerRequestContainer from './PassengerRequestContainer'
 
 import { setCurrentUser } from '../actions/users'
 
-import { Grid, Card } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 class UserProfile extends React.Component {
 
@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
 
           <Grid.Column>
             <h3> Pending Passenger Requests </h3>
-            <UserProfilePassengerRequestContainer/>
+            <PassengerRequestContainer/>
           </Grid.Column>
 
   			</Grid>

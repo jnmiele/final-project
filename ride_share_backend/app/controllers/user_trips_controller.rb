@@ -32,5 +32,10 @@ class UserTripsController < ApplicationController
 		@ut.save
 		render json: @ut
 	end
+
+	def destroy
+		UserTrip.find(params[:id]).destroy
+		render json: { message: 'UserTrip was deleted.'}
+	end
 	
 end

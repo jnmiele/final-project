@@ -10,8 +10,7 @@ import TripsList from './TripsList'
 class TripsContainer extends React.Component {
 
 	componentDidMount(){
-		const token = localStorage.getItem("jwtToken")
-		this.props.fetchAllTrips(token)
+		this.props.fetchAllTrips()
 	}
 
 	renderComponents = (props) => {
@@ -38,8 +37,8 @@ class TripsContainer extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchAllTrips: (token) => {
-    	dispatch(fetchAllTrips(token))
+    fetchAllTrips: () => {
+    	dispatch(fetchAllTrips())
     }
   }
 }

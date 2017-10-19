@@ -28,7 +28,8 @@ export function loginUser(params) {
     .then(res => res.json())
     .then(res => {
       dispatch(doLogin(res))
-      localStorage.setItem('jwtToken', res.jwt)
+      const token = localStorage.setItem('jwtToken', res.jwt)
+      setCurrentUser(token)
     })
   }
 }

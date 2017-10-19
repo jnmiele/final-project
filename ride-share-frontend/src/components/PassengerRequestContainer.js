@@ -1,16 +1,14 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { Grid, Card } from 'semantic-ui-react'
 
 import { fetchAllUserTrips } from '../actions/userTrips'
-import UserProfilePassengerRequest from './UserProfilePassengerRequest'
+import PassengerRequest from './PassengerRequest'
 
-class UserProfilePassengerRequestContainer extends React.Component {
+class PassengerRequestContainer extends React.Component {
 
 	componentDidMount() {
-		console.log("request container mounted")
 		this.props.fetchAllUserTrips()
 	}
 
@@ -19,13 +17,11 @@ class UserProfilePassengerRequestContainer extends React.Component {
 		if (this.props.userTrips && this.props.userTrips.length > 0) {
 			let passengers = this.props.userTrips.filter(trip => trip.role === "Passenger")
 			
-			passengers = passengers.map((req, index) => <UserProfilePassengerRequest key={index} id={req.id} user={req.user} trip={req.trip} role={req.role} confirmed={req.confirmed}/>)
+			passengers = passengers.map((req, index) => <PassengerRequest key={index} id={req.id} user={req.user} trip={req.trip} role={req.role} confirmed={req.confirmed}/>)
 			return (
-				<Grid.Column>
-		      <Card.Group>
+	      <Card.Group>
 		      {passengers}
-		      </Card.Group>
-		    </Grid.Column>
+	      </Card.Group>
 			)	
 		}
 		return(
@@ -48,4 +44,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfilePassengerRequestContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(PassengerRequestContainer)

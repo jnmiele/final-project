@@ -2,32 +2,34 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { showTrip } from '../actions/trips'
+import { showTrip, cancelTrip } from '../actions/trips'
 import { setCurrentUser } from '../actions/users'
 import { requestJoin } from '../actions/userTrips'
+import PassengerRequestContainer from './PassengerRequestContainer'
 
-/* ADD A TERNARY OPERATOR FOR THE BUTTON THAT CHECKS CURRENTUSER.ID VS TRIP.DRIVER.ID VS TRIP.PASSENGERS.ID */
-/* IF USER.userTrips.find(thisUserTrip) { abandon trip : display join trip}  */
-/* abandon trip : { can add another ternary here that offers abandon ONLY IF ACCEPTED }  */
-
+import { Grid } from 'semantic-ui-react'
 
 
 class TripShow extends React.Component {
 
 	componentDidMount(){
 		const showURL = (this.props.location.pathname)
+		const token = localStorage.getItem('jwtToken')
 		this.props.showTrip(showURL)
-		setTimeout(() => {
-			if (localStorage.getItem('jwtToken')){
-	      const token = localStorage.getItem('jwtToken')
-	      this.props.setCurrentUser(token)
-	    }
-		}, 300)
+		if (this.props.currentUser.id === "" && token) {
+			this.props.setCurrentUser(token)
+		}
 	}
 
 	onClick = (event) => {
 		const tripId = parseInt(event.target.id)
 		this.props.requestJoin(tripId)
+	}
+
+	cancelTrip = (event) => {
+		const tripId = parseInt(event.target.id)
+		this.props.cancelTrip(tripId)
+		this.props.history.push('/me')
 	}
 
 	listPassengers = () => {
@@ -36,27 +38,37 @@ class TripShow extends React.Component {
 		})
 	}
 
-	checkIfJoined = () => {
-		if (this.props.currentUser.id !== 0) {
-			const passengers = this.props.thisTrip.passengers
-			const userId = this.props.currentUser.id
-			{passengers.find(p => p.id === userId)? true:false}
-		}
+	checkIfJoined() {
+  if (this.props.currentUser.id !== 0) {
+    const passengers = this.props.thisTrip.passengers
+    const userId = this.props.currentUser.id
+	    if (passengers.find(p => p.id === userId)) {
+	      return true
+	    }
+	  }
 	}
 
   displayButton = () => {
+  	console.log("props bro", this.props)
     if (this.props.currentUser.id === this.props.thisTrip.driver.id) {
     	return (
     		<div> 
     			Looks like you're driving!<br/>
     			<div>
-    				Passenger Requests:<br/>
-    				{this.props.thisTrip.passengers > 0 ? this.listPassengers() : "Looks like there's no requests to join your trip right now..."}
+    				<button onClick={this.cancelTrip} id={this.props.thisTrip.id}> Cancel Trip </button><br/>
+    				<br/>
+    				<Grid columns={1}> 
+    					<h1> Passenger Requests: </h1>
+          		<Grid.Column>
+    						{this.props.thisTrip.passengers.length > 0 ? <PassengerRequestContainer/> : "Looks like there's no requests to join your trip right now..."}
+    					</Grid.Column>
+    				</Grid> 
     			</div>
     		</div>
     	)
     } else if (this.props.currentUser.id !== this.props.thisTrip.driver.id) {
-    	if (this.checkIfJoined() === true) {
+    	const joined = this.checkIfJoined()
+    	if (joined === true) {
     		return <div> looks like you already joined this trip </div>
     	}
     	return <button id={this.props.thisTrip.id} onClick={this.onClick}> Join Trip </button>
@@ -64,7 +76,6 @@ class TripShow extends React.Component {
   }
 
 	render() {
-		console.log(this.props.thisTrip)
 		if (this.props.thisTrip) {
 			return(
 				<div className="trip">
@@ -97,6 +108,9 @@ function mapDispatchToProps(dispatch) {
     },
     setCurrentUser: (token) => {
     	dispatch(setCurrentUser(token))
+    },
+    cancelTrip: (id) => {
+    	dispatch(cancelTrip(id))
     }
   }
 }

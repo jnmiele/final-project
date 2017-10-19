@@ -1,5 +1,7 @@
+const token = localStorage.getItem("jwtToken")
+
+
 export function createTrip(tripParams, history) {
-  const token = localStorage.getItem("jwtToken")
   const body = JSON.stringify(tripParams)
   return function(dispatch, history) {
   	fetch("http://localhost:3000/trips/new", {
@@ -24,7 +26,7 @@ function newTrip(params) {
 }
 
 
-export function fetchAllTrips(token) {
+export function fetchAllTrips() {
   return function(dispatch) {
     fetch("http://localhost:3000/trips/", {
       method: "GET",
@@ -65,5 +67,21 @@ function showPage(trip) {
   return {
     type: "SHOW_TRIP",
     payload: trip
+  }
+}
+
+
+export function cancelTrip(id) {
+  return function(dispatch) {
+    fetch(`http://localhost:3000/trips/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => fetchAllTrips())
   }
 }

@@ -11,19 +11,13 @@ import TripsContainer from './components/TripsContainer'
 import TripShow from './components/TripShow'
 import UserProfile from './components/UserProfile'
 import UsersShow from './components/UsersShow'
-// import { setUser } from './actions/users'
 import Authorize from './components/Authorize'
 
 
 
 class App extends Component {
 
-  // componentDidMount() {
-  //   if (localStorage.getItem('jwtToken')){
-  //     const token = localStorage.getItem('jwtToken')
-  //     this.props.setUser(token)
-  //   }
-  // }
+  
 
   render() {
     const AuthorizedTripsContainer = Authorize(TripsContainer)
@@ -55,13 +49,4 @@ class App extends Component {
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     setUser: (token) => {
-//       dispatch(setUser(token))
-//     }
-//   }
-// }
-
-export default App;
-// export default connect(null, mapDispatchToProps)(App);
+export default App

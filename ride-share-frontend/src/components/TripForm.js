@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createTrip } from '../actions/trips'
 
-import { Button } from 'semantic-ui-react'
 
 
 class TripForm extends React.Component {

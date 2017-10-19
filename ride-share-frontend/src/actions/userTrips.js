@@ -25,31 +25,6 @@ function sendReq(trip) {
   }
 }
 
-export function requestDetails(id) {
-  return function(dispatch) {
-    fetch(`http://localhost:3000/usertrips/${id}`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `${token}`
-      }
-    })
-    .then(tripInfo => tripInfo.json())
-    .then(tripInfo => {
-      // console.log(tripInfo)
-      dispatch(requested(tripInfo))
-    }
-    )
-  }
-}
-
-function requested(tripInfo) {
-  return {
-    type: "REQ_TRIP_INFO",
-    payload: tripInfo
-  }
-}
 
 export function acceptPassenger(id) {
   return function(dispatch) {
@@ -73,6 +48,7 @@ function acceptPass(userTrip) {
   }
 }
 
+
 export function fetchAllUserTrips() {
   return function(dispatch) {
     fetch(`http://localhost:3000/usertrips`, {
@@ -95,3 +71,21 @@ function fetchAllUT(allTrips) {
   }
 }
 
+
+export function declinePassenger(id) {
+  return function(dispatch) {
+    fetch(`http://localhost:3000/usertrips/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log("should be deleted now!", res)
+      fetchAllUserTrips()
+    })
+  }
+}
