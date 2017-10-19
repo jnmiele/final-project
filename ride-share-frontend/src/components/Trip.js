@@ -13,7 +13,6 @@ const Trip = (props) => {
 		}
 		return 0
 	}
-	console.log(props)
 	return(
 		<Card>
 			<Image src="placeholder" />

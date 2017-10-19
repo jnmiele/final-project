@@ -36,7 +36,11 @@ export function requestDetails(id) {
       }
     })
     .then(tripInfo => tripInfo.json())
-    .then(tripInfo => dispatch(requested(tripInfo)))
+    .then(tripInfo => {
+      // console.log(tripInfo)
+      dispatch(requested(tripInfo))
+    }
+    )
   }
 }
 
@@ -68,3 +72,26 @@ function acceptPass(userTrip) {
     payload: userTrip
   }
 }
+
+export function fetchAllUserTrips() {
+  return function(dispatch) {
+    fetch(`http://localhost:3000/usertrips`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    })
+    .then(alltrips => alltrips.json())
+    .then(alltrips => dispatch(fetchAllUT(alltrips)))
+  }
+}
+
+function fetchAllUT(allTrips) {
+  return {
+    type: "FETCH_ALL_USER_TRIPS",
+    payload: allTrips
+  }
+}
+

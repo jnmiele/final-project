@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom'
+import Footer from './components/Footer'
 import Home from './components/Home'
 import LoginForm from './components/LoginForm'
 import NavBar from './components/NavBar'
@@ -48,6 +49,7 @@ class App extends Component {
           <Route exact path="/trips/:id" component={AuthorizedTripShow}/>
           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
         </Switch>
+        <Footer />
       </div>
     );
   }

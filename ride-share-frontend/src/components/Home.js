@@ -5,6 +5,9 @@ import {fetchAllTrips } from '../actions/trips'
 import LoginForm from './LoginForm'
 import TripsContainer from './TripsContainer'
 
+import { Button } from 'semantic-ui-react'
+
+
 class Home extends React.Component {
 
 	componentDidMount(){
@@ -15,15 +18,11 @@ class Home extends React.Component {
 	render() {
 		if (localStorage.getItem("jwtToken")) {
 			return(
-			<div>
-				<div>
-					<br/><br/><br/><br/>
-					<h3> Going somewhere? Bring somebody!</h3>
-					<Link to="/trips/new"><button>Start a Trip</button></Link>
-					<Link to="/trips"><button>Find a Trip</button></Link>
-					<br/><br/><br/><br/>
+				<div className="form-container">
+					<h1> Going somewhere? Bring somebody!</h1>
+					<Link to="/trips/new"><Button>Start a Trip</Button></Link>
+					<Link to="/trips"><Button>Find a Trip</Button></Link>
 				</div>
-			</div>
 		)
 		}
 		return(

@@ -7,14 +7,15 @@ function tripsReducer(state = {list: []}, action) {
 
 		case "FETCH_ALL_USER_TRIPS":
 			const trips = action.payload
-			return Object.assign({}, state, {list: trips })
+			return state = {...state, all: trips}
 
 		case "REQ_TRIP_INFO":
 			const tripInfo = action.payload
 			return state = {...state, tripInfo}
 
 		case "ACCEPT_PASSENGER":
-			const userTrip = action.payload
+			let userTrip = state.all.find(n => n.id === action.payload.id)
+			userTrip.confirmed = true
 			return state
 
 		default:

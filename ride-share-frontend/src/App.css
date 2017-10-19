@@ -2,18 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
 .App-title {
   font-size: 1.5em;
 }
@@ -22,10 +10,6 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 .nav-item {
   display: inline;
@@ -33,5 +17,36 @@
 }
 
 .navbar {
-  padding-bottom: 25px;
+  height: 3%;
+  padding-bottom: .25%;
+  background-color: white;
+}
+
+body, html {
+  height: 100%;
+  background-image: url(https://momentumdash.com/backgrounds/14.jpg);
+  background-color: #1e1e1e;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.form-container {
+  margin: auto;
+  font-size: large;
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#footer {
+  background-color: white;
+  width: 100%;
+  height: 3%;
+  position: fixed; 
+  bottom: 0px; 
+  left: 0px;
+  padding-top: .25%;
 }
