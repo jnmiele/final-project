@@ -9,4 +9,8 @@ class UserTrip < ApplicationRecord
 	def trip
 		Trip.find(self.trip_id)
 	end
+
+	def driver
+		self.trip.driver
+	end
 end

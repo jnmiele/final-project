@@ -29,7 +29,7 @@ class PassengerRequest extends React.Component {
 	}
 
 	render() {
-		if (this.props && !this.props.confirmed) {
+		if (this.props) {
 			const userShow = `/users/${this.props.user.id}`
 			return(
 				<Card>
@@ -50,8 +50,6 @@ class PassengerRequest extends React.Component {
 					</Card.Content>
 				</Card>
 			)
-		} else if (this.props && this.props.confirmed) {
-			return null
 		}
 		return(	
 			<div> loader.</div>
