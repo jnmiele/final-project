@@ -19,6 +19,13 @@ class TripsController < ApplicationController
 		render json: @trips
 	end
 
+	def edit
+		@t = Trip.find(params[:id])
+		@t.completed = true
+		@t.save
+		render json: @t
+	end
+
 	def destroy
 		@trip = Trip.find(params[:id])
 		@trip.user_trips.each{|ut| ut.destroy}

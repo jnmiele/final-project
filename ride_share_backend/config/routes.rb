@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 	
   post '/trips/new', to: 'trips#create'
   get '/trips/:id', to: 'trips#show'
+  patch '/trips/:id/edit', to: 'trips#edit'
   get '/trips', to: 'trips#index'
   delete '/trips/:id', to: 'trips#destroy'
 

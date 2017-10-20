@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {fetchAllTrips } from '../actions/trips'
+import {setCurrentUser } from '../actions/users'
 import LoginForm from './LoginForm'
 import TripsContainer from './TripsContainer'
 
@@ -12,7 +13,8 @@ class Home extends React.Component {
 
 	componentDidMount(){
 		const token = localStorage.getItem("jwtToken")
-		this.props.fetchAllTrips(token)
+		this.props.setCurrentUser(token)
+		this.props.fetchAllTrips()
 	}
 
 	render() {
@@ -42,6 +44,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchAllTrips: (token) => {
     	dispatch(fetchAllTrips(token))
+    },
+    setCurrentUser: (token) => {
+    	dispatch(setCurrentUser(token))
     }
   }
 }

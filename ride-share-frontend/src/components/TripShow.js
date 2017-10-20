@@ -49,7 +49,6 @@ class TripShow extends React.Component {
 	}
 
   displayButton = () => {
-  	console.log("props bro", this.props)
     if (this.props.currentUser.id === this.props.thisTrip.driver.id) {
     	return (
     		<div> 

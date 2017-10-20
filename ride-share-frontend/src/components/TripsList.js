@@ -8,9 +8,11 @@ import { connect } from 'react-redux'
 
 const TripsList = (props) => {
 	if (props.trips) {
-		const trips = props.trips.map((trip, index) => <Trip key={index} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers}/>)	
+		const trips = props.trips.map((trip) => <Trip key={trip.id} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers}/>)	
 		return(
-			<Card.Group>{trips}</Card.Group>
+			<Card.Group>
+				{trips}
+			</Card.Group>
 		)
 	}
 	return(

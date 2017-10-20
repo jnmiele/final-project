@@ -23,12 +23,15 @@ class PassengerRequestContainer extends React.Component {
 
 			let passTrip = this.props.userTrips.filter(trip => trip.role === "Passenger" && !trip.confirmed)
 			passTrip = passTrip.filter(pt => pt.driver.id === this.props.currentUser.id)
-			passTrip = passTrip.map((req, index) => <PassengerRequest key={index} id={req.id} user={req.user} trip={req.trip} role={req.role} confirmed={req.confirmed}/>)
+			passTrip = passTrip.map((req) => <PassengerRequest key={req.id} id={req.id} user={req.user} trip={req.trip} role={req.role} confirmed={req.confirmed}/>)
 			
 			return (
-	      <Card.Group>
-		      {passTrip}
-	      </Card.Group>
+				<div className="one-of-three-column-container">
+           <h1> Pending Passenger Requests </h1>
+		      <Card.Group>
+			      {passTrip}
+		      </Card.Group>
+	      </div>
 			)	
 		}
 		return(

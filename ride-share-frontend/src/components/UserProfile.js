@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import PassengerRequestContainer from './PassengerRequestContainer'
 import UserProfileCompletedTripsContainer from './UserProfileCompletedTripsContainer'
 import UserProfilePendingTripsContainer from './UserProfilePendingTripsContainer'
-import PassengerRequestContainer from './PassengerRequestContainer'
+import UserProfileBio from './UserProfileBio'
 
 import { setCurrentUser } from '../actions/users'
 
@@ -21,32 +22,20 @@ class UserProfile extends React.Component {
 	render() {
   	return(
       <div>
-        <Grid columns={3}> 
-          <Grid.Column>
-            <h3> This is where a profile picture would go </h3>
-          </Grid.Column>
-          <Grid.Column>
-            <h3> This is where user notifications will go </h3>
-          </Grid.Column>
-          <Grid.Column>
-            <h3> And who knows what will go here.... </h3>
-          </Grid.Column>
-        </Grid>
+
+        <UserProfileBio />
 
   			<Grid columns={3} divided>
 
   				<Grid.Column>
-  					<h3> Completed Trips </h3>
             <UserProfileCompletedTripsContainer/>
   				</Grid.Column>
 
   				<Grid.Column>
-            <h3> Pending Trips </h3>
             <UserProfilePendingTripsContainer/>
           </Grid.Column>
 
           <Grid.Column>
-            <h3> Pending Passenger Requests </h3>
             <PassengerRequestContainer/>
           </Grid.Column>
 

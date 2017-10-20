@@ -1,3 +1,5 @@
+const token = localStorage.getItem('jwtToken')
+
 export function createUser(userParams) {
   const body = JSON.stringify(userParams)
   return function(dispatch) {
@@ -43,7 +45,6 @@ function doLogin(params) {
 
 
 export function show(user) {
-  const token = localStorage.getItem('jwtToken')
   return function(dispatch) {
     fetch(`http://localhost:3000${user}`, {
       method: 'GET',
@@ -93,5 +94,50 @@ export function logoutUser() {
   return {
     type: 'LOGOUT_USER',
     payload: 'loogout'
+  }
+}
+
+
+export function markTripCompleted(id) {
+  return function(dispatch) {
+    fetch(`http://localhost:3000/trips/${id}/edit`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    })
+    .then(trip => trip.json())
+    .then(trip => dispatch(markCompleted(trip)))
+  }
+}
+
+function markCompleted(trip) {
+  return {
+    type: "USER_MARK_COMPLETE",
+    payload: trip
+  }
+}
+
+export function markTripPending(id) {
+  return function(dispatch) {
+    fetch(`http://localhost:3000/trips/${id}/edit`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }
+    })
+    .then(trip => trip.json())
+    .then(trip => dispatch(markPending(trip)))
+  }
+}
+
+function markPending(trip) {
+  return {
+    type: "USER_MARK_PENDING",
+    payload: trip
   }
 }

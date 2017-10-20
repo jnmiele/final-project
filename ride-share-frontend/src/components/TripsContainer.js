@@ -28,8 +28,8 @@ class TripsContainer extends React.Component {
       return <Redirect to="/login" />
     }
     return (
-      <div className="container">
-      	{this.renderComponents(this.props)}  
+      <div id="trip-container">
+      	{this.renderComponents()}  
       </div>
     )
   }

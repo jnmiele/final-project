@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 
 import { Card } from 'semantic-ui-react'
 
-
-import Trip from './Trip'
+import UserProfileTrip from './UserProfileTrip'
 
 
 class UserProfilePendingTripsContainer extends React.Component {
@@ -12,15 +11,22 @@ class UserProfilePendingTripsContainer extends React.Component {
 	render() {
 		if (this.props.trips && this.props.trips.length > 0) {
 
-	    const pendingTrips = this.props.trips.map((trip, index) => <Trip key={index} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers}/>)
-	
+	    const pendingTrips = this.props.trips.map((trip, index) => {
+	    	if (!trip.completed) {
+	    		return <UserProfileTrip date={trip.date} time={trip.time} userId={this.props.currentUserId} key={trip.id} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers} completed={trip.completed}/>
+	    	}
+	    })
+			
 			return (
-        <Card.Group>
-					{pendingTrips}
-        </Card.Group>
+				<div className="one-of-three-column-container">
+          <h1> Pending Trips </h1>
+       	  <Card.Group>
+						{pendingTrips}
+       	  </Card.Group>
+       	</div>
 			)	
 		}
-		return(
+		return(	
 			<div> loader </div>
 		)
 	}
@@ -28,7 +34,8 @@ class UserProfilePendingTripsContainer extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		trips: state.users.currentUser.trips
+		trips: state.users.currentUser.trips,
+		currentUserId: state.users.currentUser.id
 	}
 }
 
