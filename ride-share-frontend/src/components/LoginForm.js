@@ -9,25 +9,11 @@ class LoginForm extends React.Component {
     password: ''
   }
 
-  confirmLogin() {
-    setTimeout(() => {
-      if (this.props.currentUser.loggedIn === true) {
-        return this.props.history.push('/trips')
-      }
-      this.setState({email: '', password: ''})
-      this.props.history.push('/login')
-    }, 300)
-  }
-
-  handleSubmit = (event) => {
+  handleLogin = (event) => {
     event.preventDefault()
 
-    const loginParams = {
-      email: this.state.email,
-      password: this.state.password
-    }
+    const loginParams = {email: this.state.email, password: this.state.password}
     this.props.loginUser(loginParams)
-    this.confirmLogin()
   }
 
   handleEmailChange = (event) => {
@@ -46,7 +32,7 @@ class LoginForm extends React.Component {
     return (
       <div className="container">
         <h1> Looks like you need to sign in... </h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleLogin}>
           <input onChange={this.handleEmailChange} value={this.state.email} type="text" placeholder="enter your email" required="true"/><br/>
           <input onChange={this.handlePasswordChange} value={this.state.password} type="password" placeholder="enter a password" required="true"/><br/>
           <input type="submit" />

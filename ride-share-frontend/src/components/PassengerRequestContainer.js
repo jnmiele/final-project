@@ -27,7 +27,6 @@ class PassengerRequestContainer extends React.Component {
 			
 			return (
 				<div className="one-of-three-column-container">
-           <h1> Pending Passenger Requests </h1>
 		      <Card.Group>
 			      {passTrip}
 		      </Card.Group>

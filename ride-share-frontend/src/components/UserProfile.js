@@ -2,54 +2,44 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import PassengerRequestContainer from './PassengerRequestContainer'
-import UserProfileCompletedTripsContainer from './UserProfileCompletedTripsContainer'
-import UserProfilePendingTripsContainer from './UserProfilePendingTripsContainer'
+import CompletedTripsContainer from './CompletedTripsContainer'
+import PendingTripsContainer from './PendingTripsContainer'
 import UserProfileBio from './UserProfileBio'
-
-import { setCurrentUser } from '../actions/users'
 
 import { Grid } from 'semantic-ui-react'
 
 class UserProfile extends React.Component {
 
-  componentDidMount() {
-    if (localStorage.getItem('jwtToken')){
-      const token = localStorage.getItem('jwtToken')
-      this.props.setCurrentUser(token)
-    }
-  }
-
 	render() {
-  	return(
+    if (this.props.currentUser.id !== 0) {
+      return(
       <div>
 
-        <UserProfileBio />
+        <UserProfileBio user={this.props.currentUser}/>
 
-  			<Grid columns={3} divided>
+        <Grid columns={3} divided>
 
-  				<Grid.Column>
-            <UserProfileCompletedTripsContainer/>
-  				</Grid.Column>
-
-  				<Grid.Column>
-            <UserProfilePendingTripsContainer/>
+          <Grid.Column>
+            <h1 className="container-header"> Completed Trips </h1>
+            <CompletedTripsContainer/>
           </Grid.Column>
 
           <Grid.Column>
+            <h1 className="container-header"> Pending Trips </h1>
+            <PendingTripsContainer/>
+          </Grid.Column>
+
+          <Grid.Column>
+           <h1 className="container-header"> Pending Passenger Requests </h1>
             <PassengerRequestContainer/>
           </Grid.Column>
 
-  			</Grid>
+        </Grid>
       </div>
-		)
-	}
-}
-function mapDispatchToProps(dispatch) {
-	return {
-    setCurrentUser: (user) => {
-      dispatch(setCurrentUser(user))
+    )
     }
-  }
+  	return (<div> loading </div>)
+	}
 }
 
 function mapStateToProps(state) {
@@ -58,4 +48,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile)
+export default connect(mapStateToProps)(UserProfile)

@@ -52,6 +52,8 @@ body, html {
 }
 
 #trip-container {
+  overflow: scroll;
+  height:80vh;
   margin-top: 10%;
   margin-left: 12%;
   margin-right: 12%;
@@ -63,11 +65,15 @@ body, html {
   color: white;
   width: 100%;
   height:50vh;
-  padding-left:10%;
+  padding-left:26%;
 }
 
 #user-details {
   margin: auto;
   padding-top: 4%;
   padding-bottom:1%;
+}
+
+.container-header {
+  color: white;
 }

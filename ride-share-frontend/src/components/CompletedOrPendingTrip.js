@@ -5,8 +5,14 @@ import { connect } from 'react-redux'
 
 import { markTripCompleted, markTripPending } from '../actions/users'
 
+/*
 
-const UserProfileTrip = (props) => {
+	this component is only used on the User Profile.
+	it is used for both trips that have been completed and trips that are pending.
+
+*/ 
+
+const CompletedOrPendingTrip = (props) => {
 	const tripShowURL = `trips/${props.id}`
 	const driverShowURL = `users/${props.driver.id}`
 
@@ -73,4 +79,4 @@ function mapDispatchToProps(dispatch){
 	}
 }
 
-export default connect(null, mapDispatchToProps)(UserProfileTrip)
+export default connect(null, mapDispatchToProps)(CompletedOrPendingTrip)

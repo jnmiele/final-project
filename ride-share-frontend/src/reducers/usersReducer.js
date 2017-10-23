@@ -1,7 +1,6 @@
 const initialState = {currentUser: {id: '', name: '', loggedIn: localStorage.getItem('jwtToken') ? true : false}}
 
 function usersReducer(state = initialState, action) {
-	
 	switch (action.type) {
 
 		case 'LOGIN_USER':
@@ -31,7 +30,6 @@ function usersReducer(state = initialState, action) {
 		case "USER_MARK_PENDING":
 			let pendingTrip = state.currentUser.trips.find(t => t.id === action.payload.id)
 			pendingTrip.completed = false
-			debugger
 			return state
 
 		default:

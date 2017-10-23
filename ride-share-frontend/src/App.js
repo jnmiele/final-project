@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import { Route, Switch, withRouter } from 'react-router-dom'
 import Footer from './components/Footer'
 import Home from './components/Home'
 import LoginForm from './components/LoginForm'
@@ -30,23 +32,30 @@ class App extends Component {
 
     return (
       <div className="App">
-        <NavBar />
+        <NavBar/>
+
         <Switch>
-          <Route exact path="/" render={(props) => <AuthorizedHome props={props} />}/>
+          <Route exact path="/" render={(props) => <AuthorizedHome {...props} />}/>
           <Route exact path="/me" component={AuthorizedUserProfile}/>
           <Route exact path="/signup" component={AuthorizedSignupForm}/>
           <Route exact path="/login" component={AuthorizedLoginForm}/>
           <Route exact path="/users/:id" render={(props) => <AuthorizedUsersShow props={props}/>}/>
-
           <Route exact path="/trips/new" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
           <Route exact path="/trips" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
           <Route exact path="/trips/:id" component={AuthorizedTripShow}/>
           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
         </Switch>
+        
         <Footer />
       </div>
     );
   }
 }
 
-export default App
+function mapStateToProps(state) {
+  return {
+    user: state.users.currentUser
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(App))

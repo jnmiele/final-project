@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import React from 'react'
 
-const NavBar = () => {
+const NavBar = (props) => {
 
   function onClick(event) {
     if (event.target.dataset.id === "logout") {
       localStorage.removeItem("jwtToken")
+      props.history.push('/login')
     }
   }
 
@@ -27,4 +29,4 @@ const NavBar = () => {
 	)
 }
 
-export default NavBar
+export default withRouter(NavBar)

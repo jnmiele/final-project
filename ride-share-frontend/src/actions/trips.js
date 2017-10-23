@@ -1,5 +1,4 @@
-const token = localStorage.getItem("jwtToken")
-
+const token = localStorage.getItem('jwtToken')
 
 export function createTrip(tripParams, history) {
   const body = JSON.stringify(tripParams)

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import {fetchAllTrips } from '../actions/trips'
+
 import TripForm from './TripForm'
 import TripsList from './TripsList'
 
@@ -24,9 +25,6 @@ class TripsContainer extends React.Component {
 	}
 
 	render() {
-		if (!localStorage.getItem('jwtToken')) {
-      return <Redirect to="/login" />
-    }
     return (
       <div id="trip-container">
       	{this.renderComponents()}  

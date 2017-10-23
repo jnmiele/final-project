@@ -45,10 +45,11 @@ const UserProfileBio = (props) => {
   )	
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.users.currentUser
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     user: state.users.currentUser
+//   }
+// }
 
-export default connect(mapStateToProps)(UserProfileBio)
+// export default connect(mapStateToProps)(UserProfileBio)
+export default UserProfileBio

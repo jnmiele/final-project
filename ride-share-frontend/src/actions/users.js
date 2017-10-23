@@ -29,9 +29,8 @@ export function loginUser(params) {
     })
     .then(res => res.json())
     .then(res => {
-      dispatch(doLogin(res))
       const token = localStorage.setItem('jwtToken', res.jwt)
-      setCurrentUser(token)
+      dispatch(doLogin(res))
     })
   }
 }
@@ -67,7 +66,7 @@ function showUser(user) {
 }
 
 
-export function setCurrentUser(token) {
+export function setCurrentUser() {
   return function(dispatch) {
    fetch(`http://localhost:3000/me`, {
     method: 'GET',

@@ -2,6 +2,7 @@ function tripsReducer(state = {list: []}, action) {
 	switch (action.type) {
 
 		case "CREATE_TRIP":
+		console.log("creating trip", action.payload)
 			const newTrip = action.payload
 			return state = {list: [...state.list, newTrip]}
 
