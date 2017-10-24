@@ -9,12 +9,15 @@ import CompletedOrPendingTrip from './CompletedOrPendingTrip'
 class PendingTripsContainer extends React.Component {
 
 	render() {
+		console.log("Inside of Pending Trips Render")
+		console.log("Pending Trips Props", this.props)
 		if (this.props.trips && this.props.trips.length > 0) {
 
 	    const pendingTrips = this.props.trips.map((trip, index) => {
 	    	if (!trip.completed) {
-	    		return <CompletedOrPendingTrip date={trip.date} time={trip.time} userId={this.props.currentUserId} key={trip.id} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers} completed={trip.completed}/>
+	    		return <CompletedOrPendingTrip date={trip.date} time={trip.time} userId={this.props.id} key={trip.id} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers} completed={trip.completed}/>
 	    	}
+	    	return null
 	    })
 			
 			return (
@@ -33,8 +36,8 @@ class PendingTripsContainer extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		trips: state.users.currentUser.trips,
-		currentUserId: state.users.currentUser.id
+		// trips: state.users.currentUser.trips,
+		// currentUserId: state.users.currentUser.id
 	}
 }
 

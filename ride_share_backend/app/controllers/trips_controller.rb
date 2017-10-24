@@ -19,9 +19,9 @@ class TripsController < ApplicationController
 		render json: @trips
 	end
 
-	def edit
+	def update
 		@t = Trip.find(params[:id])
-		@t.completed = true
+		@t.completed = !@t.completed
 		@t.save
 		render json: @t
 	end

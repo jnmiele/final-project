@@ -8,13 +8,13 @@ Rails.application.routes.draw do
 	
   post '/trips/new', to: 'trips#create'
   get '/trips/:id', to: 'trips#show'
-  patch '/trips/:id/edit', to: 'trips#edit'
+  patch '/trips/:id/edit', to: 'trips#update'
   get '/trips', to: 'trips#index'
   delete '/trips/:id', to: 'trips#destroy'
 
   post '/usertrips/create', to: 'user_trips#create'
   get '/usertrips/:id', to: 'user_trips#show'
-  patch '/usertrips/:id/edit', to: 'user_trips#edit'
+  patch '/usertrips/:id/edit', to: 'user_trips#update'
   get '/usertrips', to: 'user_trips#index'
   delete '/usertrips/:id', to: 'user_trips#destroy'
 end

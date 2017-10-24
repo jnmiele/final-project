@@ -1,12 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { Grid, Card, Image, Icon } from 'semantic-ui-react'
 
 const UserProfileBio = (props) => {
-
-  console.log(props)
-  if (props.user.id != '') {
+  if (props.user.id !== '') {
+    const trips = () => {
+      if (props.user.trips && props.user.trips.length > 0) {
+        return props.user.trips.length
+      }
+      return 0
+    }
     return (
       <div id='user-bio'>
         <Grid columns={1}> 
@@ -24,13 +27,13 @@ const UserProfileBio = (props) => {
                     </span>
                   </Card.Meta>
                   <Card.Description>
-                    placeholder for 'user bio' ✏️
+                    placeholder for 'user bio' <span role='img'>✏️</span>
                   </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                   <a>
                     <Icon name='car' />
-                    {props.user.trips.length} trips
+                    {trips()} trips
                   </a>
                 </Card.Content>
               </Card>
@@ -45,11 +48,4 @@ const UserProfileBio = (props) => {
   )	
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     user: state.users.currentUser
-//   }
-// }
-
-// export default connect(mapStateToProps)(UserProfileBio)
 export default UserProfileBio

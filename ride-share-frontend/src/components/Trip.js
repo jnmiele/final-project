@@ -21,7 +21,7 @@ const Trip = (props) => {
 					{props.origin} to {props.destination}
 				</Card.Header>
 				<Card.Meta>
-					Date: {props.date} No Date Bro
+					Date: {props.date}
 				</Card.Meta>
 				<Card.Description>
 					Driver:<Link to={driverShowURL}> {props.driver.name} </Link><br/>

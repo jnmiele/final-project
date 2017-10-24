@@ -3,7 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { showTrip, cancelTrip } from '../actions/trips'
-import { setCurrentUser } from '../actions/users'
 import { requestJoin } from '../actions/userTrips'
 import PassengerRequestContainer from './PassengerRequestContainer'
 
@@ -21,21 +20,16 @@ class TripShow extends React.Component {
 		}
 	}
 
-	onClick = (event) => {
-		const tripId = parseInt(event.target.id)
+	handleJoin = (event) => {
+		const tripId = event.target.id
 		this.props.requestJoin(tripId)
-	}
-
-	cancelTrip = (event) => {
-		const tripId = parseInt(event.target.id)
-		this.props.cancelTrip(tripId)
 		this.props.history.push('/me')
 	}
 
-	listPassengers = () => {
-		let passengers = this.props.thisTrip.passengers.forEach(passenger => {
-			return passenger.name
-		})
+	cancelTrip = (event) => {
+		const tripId = event.target.id
+		this.props.cancelTrip(tripId)
+		this.props.history.push('/me')
 	}
 
 	checkIfJoined() {
@@ -70,12 +64,13 @@ class TripShow extends React.Component {
     	if (joined === true) {
     		return <div> looks like you already joined this trip </div>
     	}
-    	return <button id={this.props.thisTrip.id} onClick={this.onClick}> Join Trip </button>
+    	return <button id={this.props.thisTrip.id} onClick={this.handleJoin}> Join Trip </button>
     }
   }
 
 	render() {
 		if (this.props.thisTrip) {
+			console.log(`users/${this.props.thisTrip.driver.id}`)
 			return(
 				<div className="trip">
 					<div className="trip-origin">
@@ -85,7 +80,7 @@ class TripShow extends React.Component {
 						Destination: {this.props.thisTrip.destination}
 					</div>
 					<div className="trip-user">
-						Driver: <Link to={`users/${this.props.thisTrip.driver.id}`}> {this.props.thisTrip.driver.name} </Link>
+						Driver: <Link to={`/users/${this.props.thisTrip.driver.id}`}> {this.props.thisTrip.driver.name} </Link>
 					</div>
 					<br/>
 					{this.displayButton()}
@@ -105,9 +100,6 @@ function mapDispatchToProps(dispatch) {
     requestJoin: (trip) => {
     	dispatch(requestJoin(trip))
     },
-    setCurrentUser: (token) => {
-    	dispatch(setCurrentUser(token))
-    },
     cancelTrip: (id) => {
     	dispatch(cancelTrip(id))
     }
@@ -116,6 +108,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
 	return {
+		user: state.users.currentUser,
 		thisTrip: state.trips.thisTrip,
 		currentUser: state.users.currentUser
 	}

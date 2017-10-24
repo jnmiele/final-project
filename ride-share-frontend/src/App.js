@@ -14,10 +14,15 @@ import TripShow from './components/TripShow'
 import UserProfile from './components/UserProfile'
 import UsersShow from './components/UsersShow'
 import Authorize from './components/Authorize'
+import { setCurrentUser } from './actions/users'
 
 
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.setCurrentUser()
+  }
 
   
 
@@ -52,10 +57,18 @@ class App extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+   return {
+    setCurrentUser: () => {
+      dispatch(setCurrentUser())
+    }
+  } 
+}
+
 function mapStateToProps(state) {
   return {
     user: state.users.currentUser
   }
 }
 
-export default withRouter(connect(mapStateToProps)(App))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

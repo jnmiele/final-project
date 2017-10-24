@@ -1,20 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { Grid, Card } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
-import { setCurrentUser } from '../actions/users'
 import { fetchAllUserTrips } from '../actions/userTrips'
 import PassengerRequest from './PassengerRequest'
 
 class PassengerRequestContainer extends React.Component {
 
 	componentDidMount() {
-		const token = localStorage.getItem('jwtToken')
 		this.props.fetchAllUserTrips()
-		if (this.props.currentUser.id === "" && token) {
-			this.props.setCurrentUser(token)
-		}
 	}
 
 
@@ -43,15 +38,13 @@ function mapDispatchToProps(dispatch) {
 	return {
 		fetchAllUserTrips: () => {
 			dispatch(fetchAllUserTrips())
-		},
-		setCurrentUser: (token) => {
-			dispatch(setCurrentUser(token))
 		}
 	}
 }
 
 function mapStateToProps(state) {
 	return {
+		user: state.users.currentUser,
 		userTrips: state.userTrips.all,
 		currentUser: state.users.currentUser
 	}

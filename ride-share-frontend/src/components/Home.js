@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {fetchAllTrips } from '../actions/trips'
-import LoginForm from './LoginForm'
-import TripsContainer from './TripsContainer'
 
 import { Button } from 'semantic-ui-react'
 
@@ -11,7 +9,6 @@ import { Button } from 'semantic-ui-react'
 class Home extends React.Component {
 
 	componentDidMount(){
-		const token = localStorage.getItem("jwtToken")
 		this.props.fetchAllTrips()
 	}
 

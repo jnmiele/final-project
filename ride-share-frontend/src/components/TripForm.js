@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createTrip } from '../actions/trips'
 
@@ -17,6 +16,7 @@ class TripForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const tripParams = {...this.state}
+    console.log(this.state)
     this.props.createTrip(tripParams)
     this.props.history.push('/me')
   }
@@ -46,7 +46,6 @@ class TripForm extends React.Component {
   }
 
   render() {
-  console.log("this:", this)
     return (
       <div className="form-container">
         <div className="ui input">

@@ -29,7 +29,6 @@ const CompletedOrPendingTrip = (props) => {
 	}
 
 	this.handleMarkPending = (event) => {
-		console.log(props)
 		event.preventDefault()
 		props.markTripPending(event.target.id)
 	}
@@ -43,7 +42,6 @@ const CompletedOrPendingTrip = (props) => {
 		}
 		return null
 	}
-
 	return(
 		<Card>
 			<Image src="placeholder" />
@@ -52,7 +50,7 @@ const CompletedOrPendingTrip = (props) => {
 					{props.origin} to {props.destination}
 				</Card.Header>
 				<Card.Meta>
-					Date: {props.date} No Date Bro
+					Date: {props.date}
 				</Card.Meta>
 				<Card.Description>
 					Driver:<Link to={driverShowURL}> {props.driver.name} </Link><br/>

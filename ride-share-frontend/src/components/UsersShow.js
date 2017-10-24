@@ -2,6 +2,11 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 import { show } from '../actions/users'
+import CompletedTripsContainer from './CompletedTripsContainer'
+import PendingTripsContainer from './PendingTripsContainer'
+import UserProfileBio from './UserProfileBio'
+
+import { Grid } from 'semantic-ui-react'
 
 
 class UsersShow extends React.Component {
@@ -13,12 +18,25 @@ class UsersShow extends React.Component {
 
 	render() {
 		if (this.props.user !== undefined && this.props.user.showUser !== undefined) {
-			const thisUser = (this.props.user.showUser)
 			return(
-				<div className="user">
-					email: {thisUser.email}<br/>
-					id: {thisUser.id}
-				</div>
+				<div>
+					<UserProfileBio user={this.props.user.currentUser} />
+					<div>
+						<Grid columns={2} divided>
+
+	          	<Grid.Column>
+	            	<h1 className="container-header"> Completed Trips </h1>
+	            	<CompletedTripsContainer/>
+	         	  </Grid.Column>
+
+	          	<Grid.Column>
+	            	<h1 className="container-header"> Pending Trips </h1>
+	            	<PendingTripsContainer/>
+	          	</Grid.Column>
+
+	        	</Grid>
+	        </div>
+	      </div>
 			)
 		}
 		return(
@@ -32,7 +50,7 @@ function mapDispatchToProps(dispatch) {
     show: (user) => {
       dispatch(show(user))
     }
-  }
+	}
 }
 
 function mapStateToProps(state) {

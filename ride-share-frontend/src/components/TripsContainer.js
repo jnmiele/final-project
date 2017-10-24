@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import {fetchAllTrips } from '../actions/trips'
@@ -25,7 +24,6 @@ class TripsContainer extends React.Component {
 	}
 
 	render() {
-		console.log("trip container props", this.props)
     return (
       <div id="trip-container">
       	{this.renderComponents()}  

@@ -11,7 +11,6 @@ class LoginForm extends React.Component {
 
   handleLogin = (event) => {
     event.preventDefault()
-
     const loginParams = {email: this.state.email, password: this.state.password}
     this.props.loginUser(loginParams)
   }
@@ -30,14 +29,16 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="form-container">
         <h1> Looks like you need to sign in... </h1>
-        <form onSubmit={this.handleLogin}>
-          <input onChange={this.handleEmailChange} value={this.state.email} type="text" placeholder="enter your email" required="true"/><br/>
-          <input onChange={this.handlePasswordChange} value={this.state.password} type="password" placeholder="enter a password" required="true"/><br/>
-          <input type="submit" />
-        </form>
+        <div className="ui input">
+          <form onSubmit={this.handleLogin}>
+            <input onChange={this.handleEmailChange} value={this.state.email} type="text" placeholder="enter your email" required="true"/><br/>
+            <input onChange={this.handlePasswordChange} value={this.state.password} type="password" placeholder="enter a password" required="true"/><br/>
+            <input type="submit" />
+          </form>
         </div>
+      </div>
     )
   }
 }

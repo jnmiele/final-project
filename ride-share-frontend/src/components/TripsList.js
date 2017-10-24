@@ -7,9 +7,12 @@ import { connect } from 'react-redux'
 
 
 const TripsList = (props) => {
-	console.log(props)
 	if (props.trips) {
-		const trips = props.trips.map((trip) => <Trip key={trip.id} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers}/>)	
+		const trips = props.trips.map((trip) => {
+			if (!trip.completed) {
+				return <Trip key={trip.id} id={trip.id} destination={trip.destination} origin={trip.origin} driver={trip.driver} passengers={trip.passengers} date={trip.date}/>	
+			}
+		})
 		return(
 			<Card.Group>
 				{trips}
