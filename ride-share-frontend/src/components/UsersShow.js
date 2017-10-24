@@ -7,7 +7,7 @@ import { show } from '../actions/users'
 class UsersShow extends React.Component {
 
 	componentDidMount(){
-		const user = (this.props.props.location.pathname)
+		const user = (this.props.location.pathname)
 		this.props.show(user)
 	}
 

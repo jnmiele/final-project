@@ -39,9 +39,9 @@ class App extends Component {
           <Route exact path="/me" component={AuthorizedUserProfile}/>
           <Route exact path="/signup" component={AuthorizedSignupForm}/>
           <Route exact path="/login" component={AuthorizedLoginForm}/>
-          <Route exact path="/users/:id" render={(props) => <AuthorizedUsersShow props={props}/>}/>
-          <Route exact path="/trips/new" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
-          <Route exact path="/trips" render={(props) => <AuthorizedTripsContainer props={props}/>}/>
+          <Route exact path="/users/:id" render={(props) => <AuthorizedUsersShow {...props} {...this.props}/>}/>
+          <Route exact path="/trips/new" render={(props) => <AuthorizedTripsContainer {...props} {...this.props} />}/>
+          <Route exact path="/trips" render={(props) => <AuthorizedTripsContainer {...props} {...this.props}/>}/>
           <Route exact path="/trips/:id" component={AuthorizedTripShow}/>
           <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
         </Switch>

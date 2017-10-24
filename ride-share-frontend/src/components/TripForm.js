@@ -18,6 +18,7 @@ class TripForm extends React.Component {
     event.preventDefault()
     const tripParams = {...this.state}
     this.props.createTrip(tripParams)
+    this.props.history.push('/me')
   }
 
   handleOriginChange = (event) => {
@@ -45,23 +46,20 @@ class TripForm extends React.Component {
   }
 
   render() {
-    if (!localStorage.getItem('jwtToken')) {
-      return <Redirect to="/login" />
-    } else {
-      return (
-        <div className="form-container">
-          <div className="ui input">
-            <form onSubmit={this.handleSubmit}>
-              <input onChange={this.handleDestinationChange} type="text" placeholder="where to?" required="true"/><br/>
-              <input onChange={this.handleOriginChange} type="text" placeholder="where from?" required="true"/><br/>
-              <input onChange={this.handleDateChange} type="date" required="true"/>
-              <input onChange={this.handleTimeChange} type="time" required="true"/><br/>
-              <input type="submit" />
-            </form>
-          </div>
+  console.log("this:", this)
+    return (
+      <div className="form-container">
+        <div className="ui input">
+          <form onSubmit={this.handleSubmit}>
+            <input onChange={this.handleDestinationChange} type="text" placeholder="where to?" required="true"/><br/>
+            <input onChange={this.handleOriginChange} type="text" placeholder="where from?" required="true"/><br/>
+            <input onChange={this.handleDateChange} type="date" required="true"/>
+            <input onChange={this.handleTimeChange} type="time" required="true"/><br/>
+            <input type="submit" />
+          </form>
         </div>
-      )
-    }
+      </div>
+    )
   }
 }
 
