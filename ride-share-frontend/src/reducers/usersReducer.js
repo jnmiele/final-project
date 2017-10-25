@@ -21,17 +21,7 @@ function usersReducer(state = initialState, action) {
 				return state = {...state, currentUser: initialState}
 			}
 		break
-
-		case "USER_MARK_COMPLETE":
-			let completedTrip = state.currentUser.trips.find(t => t.id === action.payload.id)
-			completedTrip.completed = true
-			return state
-
-		case "USER_MARK_PENDING":
-			let pendingTrip = state.currentUser.trips.find(t => t.id === action.payload.id)
-			pendingTrip.completed = false
-			return state
-
+		
 		default:
 			return state
 	}

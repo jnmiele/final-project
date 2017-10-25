@@ -15,6 +15,7 @@ import UserProfile from './components/UserProfile'
 import UsersShow from './components/UsersShow'
 import Authorize from './components/Authorize'
 import { setCurrentUser } from './actions/users'
+import { fetchAllUserTrips } from './actions/userTrips'
 
 
 
@@ -22,6 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.setCurrentUser()
+    this.props.fetchAllUserTrips()
   }
 
   
@@ -61,6 +63,9 @@ function mapDispatchToProps(dispatch) {
    return {
     setCurrentUser: () => {
       dispatch(setCurrentUser())
+    },
+    fetchAllUserTrips: () => {
+      dispatch(fetchAllUserTrips())
     }
   } 
 }

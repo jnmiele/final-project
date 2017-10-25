@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
 import { Card } from 'semantic-ui-react'
 
@@ -9,8 +8,6 @@ import CompletedOrPendingTrip from './CompletedOrPendingTrip'
 class PendingTripsContainer extends React.Component {
 
 	render() {
-		console.log("Inside of Pending Trips Render")
-		console.log("Pending Trips Props", this.props)
 		if (this.props.trips && this.props.trips.length > 0) {
 
 	    const pendingTrips = this.props.trips.map((trip, index) => {
@@ -34,11 +31,4 @@ class PendingTripsContainer extends React.Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		// trips: state.users.currentUser.trips,
-		// currentUserId: state.users.currentUser.id
-	}
-}
-
-export default connect(mapStateToProps)(PendingTripsContainer)
+export default PendingTripsContainer

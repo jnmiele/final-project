@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def me
     token = decoded_token # => [{"user_id"=> int}, {"alg"=>"HS256"}]
-    @user = User.find(token[0]['user_id'])
+    @user = User.includes(:user_trips => :user).find(token[0]['user_id'])
     render json: @user
   end
 

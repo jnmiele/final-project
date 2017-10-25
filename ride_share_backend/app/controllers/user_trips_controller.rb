@@ -17,7 +17,7 @@ class UserTripsController < ApplicationController
 	end
 
 	def index
-		@user_trips = UserTrip.all
+		@user_trips = UserTrip.includes(:trip).includes(:user).all
 		render json: @user_trips
 	end
 
@@ -26,7 +26,7 @@ class UserTripsController < ApplicationController
 		render json: @ut
 	end
 
-	def edit
+	def update
 		@ut = UserTrip.find(params[:id])
 		@ut.confirmed = true
 		@ut.save

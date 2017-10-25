@@ -108,16 +108,12 @@ export function markTripCompleted(id) {
       }
     })
     .then(trip => trip.json())
-    .then(trip => dispatch(markCompleted(trip)))
+    .then((user) => {
+      dispatch(set(user))
+    })
   }
 }
 
-function markCompleted(trip) {
-  return {
-    type: "USER_MARK_COMPLETE",
-    payload: trip
-  }
-}
 
 export function markTripPending(id) {
   return function(dispatch) {
@@ -129,14 +125,9 @@ export function markTripPending(id) {
         'Authorization': `${token}`
       }
     })
-    .then(trip => trip.json())
-    .then(trip => dispatch(markPending(trip)))
-  }
-}
-
-function markPending(trip) {
-  return {
-    type: "USER_MARK_PENDING",
-    payload: trip
+    .then(user => user.json())
+    .then((user) => {
+      dispatch(set(user))
+    })
   }
 }

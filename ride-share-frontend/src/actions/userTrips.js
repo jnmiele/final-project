@@ -27,6 +27,7 @@ function sendReq(trip) {
 
 
 export function acceptPassenger(id) {
+
   return function(dispatch) {
     fetch(`http://localhost:3000/usertrips/${id}/edit`, {
       method: 'PATCH',
@@ -37,17 +38,11 @@ export function acceptPassenger(id) {
       }
     })
     .then(userTrip => userTrip.json())
-    .then(userTrip => dispatch(acceptPass(userTrip)))
+    .then(res => {
+      dispatch(fetchAllUserTrips())
+    })
   }
 }
-
-function acceptPass(userTrip) {
-  return {
-    type: "ACCEPT_PASSENGER",
-    payload: userTrip
-  }
-}
-
 
 export function fetchAllUserTrips() {
   return function(dispatch) {
@@ -84,8 +79,7 @@ export function declinePassenger(id) {
     })
     .then(res => res.json())
     .then(res => {
-      console.log("should be deleted now!", res)
-      fetchAllUserTrips()
+      dispatch(fetchAllUserTrips())
     })
   }
 }

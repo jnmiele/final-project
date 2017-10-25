@@ -5,7 +5,7 @@ class TripsController < ApplicationController
 		token = decoded_token # => [{"user_id"=> int}, {"alg"=>"HS256"}]
 		@trip = Trip.create(trip_params)
     @user = User.find(token[0]['user_id'])
-    UserTrip.create(user: @user, trip: @trip, role: "Driver")
+    UserTrip.create(user: @user, trip: @trip, role: "Driver", confirmed: true)
     render json: @trip
 	end
 
@@ -15,15 +15,17 @@ class TripsController < ApplicationController
 	end
 
 	def index
-		@trips = Trip.all
+		@trips = Trip.includes(:users).includes(:user_trips).all
 		render json: @trips
 	end
 
 	def update
+		token = decoded_token
 		@t = Trip.find(params[:id])
 		@t.completed = !@t.completed
 		@t.save
-		render json: @t
+		@user = User.find(token[0]['user_id'])
+		render json: @user
 	end
 
 	def destroy
