@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       password: params[:password])
     if user.save
       token = encode_token({ user_id: user.id})
-      render json: {user_id: user.id, user_name: user.name, jwt: token}
+      render json: {user: user, jwt: token}
     else
     	render json: { message: 'Error'}
     end
