@@ -17,6 +17,7 @@ class UsersShow extends React.Component {
 	}
 
 	render() {
+		console.log(this.props)
 		if (this.props.user !== undefined && this.props.user.showUser !== undefined) {
 			return(
 				<div>
@@ -25,13 +26,11 @@ class UsersShow extends React.Component {
 						<Grid columns={2} divided>
 
 	          	<Grid.Column>
-	            	<h1 className="container-header"> Completed Trips </h1>
-	            	<CompletedTripsContainer/>
+	            	<CompletedTripsContainer {...this.props.user.showUser}/>
 	         	  </Grid.Column>
 
 	          	<Grid.Column>
-	            	<h1 className="container-header"> Pending Trips </h1>
-	            	<PendingTripsContainer/>
+	            	<PendingTripsContainer {...this.props.user.showUser}/>
 	          	</Grid.Column>
 
 	        	</Grid>

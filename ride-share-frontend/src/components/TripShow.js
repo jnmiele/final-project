@@ -86,9 +86,19 @@ class TripShow extends React.Component {
 	render() {
 		if (this.props.thisTrip) {
 			const key = 'AIzaSyDkLcl-yTJinR7cqhbcqldTXX8x5LSw6sg'
-			const origin = this.props.thisTrip.origin
-			const destination = this.props.thisTrip.destination
-			const route = `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin}&destination=${destination}`
+			const origin = () => {
+				if (this.props.thisTrip.origin.includes(' ')) {
+					const address = this.props.thisTrip.origin.replace(' ', '+')
+					return address
+				}
+			}
+			const destination = () => {
+				if (this.props.thisTrip.destination.includes(' ')) {
+					const address = this.props.thisTrip.destination.replace(' ', '+')
+					return address
+				}
+			}
+			const route = `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin()}&destination=${destination()}`
 
 			return(
 				<div className='trip-container'>

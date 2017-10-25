@@ -26,15 +26,12 @@ const UserProfileBio = (props) => {
                       {props.user.email}
                     </span>
                   </Card.Meta>
-                  <Card.Description>
-                    placeholder for 'user bio' <span role='img'>✏️</span>
-                  </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                  <a>
-                    <Icon name='car' />
-                    {trips()} trips
-                  </a>
+                  <Icon name='car' />
+                  {trips()} trips <br/>
+                  <Icon name='star' />
+                  Ratings coming soon!
                 </Card.Content>
               </Card>
             </Grid.Column>

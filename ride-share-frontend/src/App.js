@@ -22,8 +22,10 @@ import { fetchAllUserTrips } from './actions/userTrips'
 class App extends Component {
 
   componentDidMount() {
-    this.props.setCurrentUser()
-    this.props.fetchAllUserTrips()
+    if (localStorage.getItem('jwtToken')) {
+      this.props.setCurrentUser()
+      this.props.fetchAllUserTrips()
+    }
   }
 
   

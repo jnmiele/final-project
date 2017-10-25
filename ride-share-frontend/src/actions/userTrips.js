@@ -1,6 +1,5 @@
-const token = localStorage.getItem("jwtToken")
-
 export function requestJoin(trip) {
+  const token = localStorage.getItem("jwtToken")
   const body = JSON.stringify({trip, jwt: token})
   console.log(body)
   return function(dispatch) {
@@ -27,7 +26,7 @@ function sendReq(trip) {
 
 
 export function acceptPassenger(id) {
-
+  const token = localStorage.getItem("jwtToken")
   return function(dispatch) {
     fetch(`http://localhost:3000/usertrips/${id}/edit`, {
       method: 'PATCH',
@@ -45,6 +44,7 @@ export function acceptPassenger(id) {
 }
 
 export function fetchAllUserTrips() {
+  const token = localStorage.getItem("jwtToken")
   return function(dispatch) {
     fetch(`http://localhost:3000/usertrips`, {
       method: 'GET',
@@ -68,6 +68,7 @@ function fetchAllUT(allTrips) {
 
 
 export function declinePassenger(id) {
+  const token = localStorage.getItem("jwtToken")
   return function(dispatch) {
     fetch(`http://localhost:3000/usertrips/${id}`, {
       method: 'DELETE',

@@ -1,4 +1,4 @@
-const token = localStorage.getItem('jwtToken')
+import { fetchAllUserTrips } from './userTrips'
 
 export function createUser(userParams) {
   const body = JSON.stringify(userParams)
@@ -28,9 +28,20 @@ export function loginUser(params) {
       body: body
     })
     .then(res => res.json())
+    .then(res => dispatch(doLogin(res)))
     .then(res => {
-      const token = localStorage.setItem('jwtToken', res.jwt)
-      dispatch(doLogin(res))
+      {res.payload.jwt? localStorage.setItem('jwtToken', res.payload.jwt):null}
+      dispatch(set(res.payload.user))
+    })
+    .then(() => {
+      if (localStorage.getItem('jwtToken')) {
+        dispatch(setCurrentUser())
+      }
+    })
+    .then(() => {
+      if (localStorage.getItem('jwtToken')) {
+        dispatch(fetchAllUserTrips())
+      }
     })
   }
 }
@@ -44,6 +55,7 @@ function doLogin(params) {
 
 
 export function show(user) {
+  const token = localStorage.getItem('jwtToken')
   return function(dispatch) {
     fetch(`http://localhost:3000${user}`, {
       method: 'GET',
@@ -67,6 +79,7 @@ function showUser(user) {
 
 
 export function setCurrentUser() {
+  const token = localStorage.getItem('jwtToken')
   return function(dispatch) {
    fetch(`http://localhost:3000/me`, {
     method: 'GET',
@@ -98,6 +111,7 @@ export function logoutUser() {
 
 
 export function markTripCompleted(id) {
+  const token = localStorage.getItem('jwtToken')
   return function(dispatch) {
     fetch(`http://localhost:3000/trips/${id}/edit`, {
       method: 'PATCH',
@@ -116,6 +130,7 @@ export function markTripCompleted(id) {
 
 
 export function markTripPending(id) {
+  const token = localStorage.getItem('jwtToken')
   return function(dispatch) {
     fetch(`http://localhost:3000/trips/${id}/edit`, {
       method: 'PATCH',
