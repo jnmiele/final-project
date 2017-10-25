@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
 import { Card } from 'semantic-ui-react'
 
@@ -15,6 +14,7 @@ class PassengerRequestContainer extends React.Component {
 			
 			return (
 				<div className="one-of-three-column-container">
+          <h1 className="container-header"> Pending Passenger Requests </h1>
 		      <Card.Group>
 			      {passTrip}
 		      </Card.Group>

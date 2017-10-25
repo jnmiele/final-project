@@ -19,6 +19,7 @@ class PendingTripsContainer extends React.Component {
 			
 			return (
 				<div className="one-of-three-column-container">
+					<h1 className="container-header"> Pending Trips </h1>
        	  <Card.Group>
 						{pendingTrips}
        	  </Card.Group>

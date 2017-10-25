@@ -16,25 +16,24 @@ class UserProfile extends React.Component {
       <div>
 
         <UserProfileBio user={this.props.currentUser}/>
+        <div id='profile-column-container'>
+          <Grid columns={3} divided>
 
-        <Grid columns={3} divided>
+            <Grid.Column>
+              <CompletedTripsContainer {...this.props.currentUser}/>
+            </Grid.Column>
 
-          <Grid.Column>
-            <h1 className="container-header"> Completed Trips </h1>
-            <CompletedTripsContainer {...this.props.currentUser}/>
-          </Grid.Column>
+            <Grid.Column>
+              
+              <PendingTripsContainer {...this.props.currentUser}/>
+            </Grid.Column>
 
-          <Grid.Column>
-            <h1 className="container-header"> Pending Trips </h1>
-            <PendingTripsContainer {...this.props.currentUser}/>
-          </Grid.Column>
+            <Grid.Column>
+              <PassengerRequestContainer {...this.props}/>
+            </Grid.Column>
 
-          <Grid.Column>
-           <h1 className="container-header"> Pending Passenger Requests </h1>
-            <PassengerRequestContainer {...this.props}/>
-          </Grid.Column>
-
-        </Grid>
+          </Grid>
+        </div>
       </div>
     )
     }

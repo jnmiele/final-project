@@ -4,20 +4,16 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { showTrip, cancelTrip } from '../actions/trips'
 import { requestJoin } from '../actions/userTrips'
-import PassengerRequestContainer from './PassengerRequestContainer'
+// import PassengerRequestContainer from './PassengerRequestContainer'
 
-import { Grid } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 
 class TripShow extends React.Component {
 
 	componentDidMount(){
 		const showURL = (this.props.location.pathname)
-		const token = localStorage.getItem('jwtToken')
 		this.props.showTrip(showURL)
-		if (this.props.currentUser.id === "" && token) {
-			this.props.setCurrentUser(token)
-		}
 	}
 
 	handleJoin = (event) => {
@@ -42,50 +38,68 @@ class TripShow extends React.Component {
 	  }
 	}
 
+	handleRate() {
+		alert("feature coming soon!")
+	}
+
   displayButton = () => {
     if (this.props.currentUser.id === this.props.thisTrip.driver.id) {
+    	if (this.props.thisTrip.completed) {
+    		return (
+    			<div> 
+    				This trip was already completed!<br/><br/>
+    				<p><Button onClick={this.handleRate} id={this.props.thisTrip.id}> Rate the Riders </Button></p>
+    			</div>
+    		)
+    	}
     	return (
     		<div> 
-    			Looks like you're driving!<br/>
-    			<div>
-    				<button onClick={this.cancelTrip} id={this.props.thisTrip.id}> Cancel Trip </button><br/>
-    				<br/>
-    				<Grid columns={1}> 
-    					<h1> Passenger Requests: </h1>
-          		<Grid.Column>
-    						{this.props.thisTrip.passengers.length > 0 ? <PassengerRequestContainer/> : "Looks like there's no requests to join your trip right now..."}
-    					</Grid.Column>
-    				</Grid> 
-    			</div>
+    			Looks like you're driving!<br/><br/>
+    			<p><Button onClick={this.cancelTrip} id={this.props.thisTrip.id}> Cancel Trip </Button></p>
     		</div>
     	)
     } else if (this.props.currentUser.id !== this.props.thisTrip.driver.id) {
     	const joined = this.checkIfJoined()
-    	if (joined === true) {
-    		return <div> looks like you already joined this trip </div>
+    	const completed = this.props.thisTrip.completed
+    	if (joined === true && !this.props.thisTrip.completed) {
+    		return (
+    			<div>
+    				Hey {this.props.currentUser.email}! Looks like you already requested to join this trip.<br/>
+    				<Link to='/me'>View My Trips</Link>
+    			</div>
+    		)
+    	} else if (!joined && !completed) {
+    		return <button id={this.props.thisTrip.id} onClick={this.handleJoin}> Join Trip </button>
+    	} else if (!joined && completed) {
+    		return <div> Sorry, this trip is no longer available. </div>
+    	} else if (joined && completed) {
+    		return (
+    			<div>
+    				This trip was already completed!<br/><br/>
+    				<p><Button onClick={this.handleRate} id={this.props.thisTrip.id}> Rate the Riders </Button></p>
+    			</div>
+    		)		 				
     	}
-    	return <button id={this.props.thisTrip.id} onClick={this.handleJoin}> Join Trip </button>
     }
   }
 
 	render() {
 		if (this.props.thisTrip) {
-			console.log(`users/${this.props.thisTrip.driver.id}`)
+			const key = 'AIzaSyDkLcl-yTJinR7cqhbcqldTXX8x5LSw6sg'
+			const origin = this.props.thisTrip.origin
+			const destination = this.props.thisTrip.destination
+			const route = `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin}&destination=${destination}`
+
 			return(
-				<div className="trip">
-					<div className="trip-origin">
-						Origin:  {this.props.thisTrip.origin}
+				<div className='trip-container'>
+					<iframe title='map' width='600' height='400' src={route}></iframe>
+					<div className='trip'>
+						<h2>Origin:  {this.props.thisTrip.origin}</h2>
+						<h2>Destination: {this.props.thisTrip.destination}</h2>
+						<p>Driver: <Link to={`/users/${this.props.thisTrip.driver.id}`}> {this.props.thisTrip.driver.name} </Link></p>
+						{this.displayButton()}
 					</div>
-					<div className="trip-destination">
-						Destination: {this.props.thisTrip.destination}
-					</div>
-					<div className="trip-user">
-						Driver: <Link to={`/users/${this.props.thisTrip.driver.id}`}> {this.props.thisTrip.driver.name} </Link>
-					</div>
-					<br/>
-					{this.displayButton()}
 				</div>
-				
 			)
 		}
 		return <div> loader page </div>
@@ -115,3 +129,14 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripShow)
+
+
+// <div>
+//     				<Button onClick={this.cancelTrip} id={this.props.thisTrip.id}> Cancel Trip </Button><br/>
+//     				<br/>
+//     				<Grid columns={1}> 
+//           		<Grid.Column>
+//     						{this.props.thisTrip.passengers.length > 0 ? <PassengerRequestContainer {...this.props.thisTrip.userTrips}/> : "Looks like there's no requests to join your trip right now..."}
+//     					</Grid.Column>
+//     				</Grid> 
+//     			</div>

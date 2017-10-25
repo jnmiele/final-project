@@ -20,7 +20,7 @@ class UsersShow extends React.Component {
 		if (this.props.user !== undefined && this.props.user.showUser !== undefined) {
 			return(
 				<div>
-					<UserProfileBio user={this.props.user.currentUser} />
+					<UserProfileBio user={this.props.user.showUser} />
 					<div>
 						<Grid columns={2} divided>
 

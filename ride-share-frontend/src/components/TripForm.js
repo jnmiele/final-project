@@ -16,7 +16,6 @@ class TripForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const tripParams = {...this.state}
-    console.log(this.state)
     this.props.createTrip(tripParams)
     this.props.history.push('/me')
   }

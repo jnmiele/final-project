@@ -16,6 +16,7 @@ class CompletedTripsContainer extends React.Component {
 	    })
 			return (
 				<div className="one-of-three-column-container">
+          <h1 className="container-header"> Completed Trips </h1>
 	        <Card.Group>
 						{completedTrips}
 	        </Card.Group>
