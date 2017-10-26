@@ -23,7 +23,7 @@ const NavBar = (props) => {
        <Link to='/trips'>Find a Trip</Link>
       </div>
       <div className="nav-item">
-      	{(localStorage.getItem("jwtToken")) ? <div className="nav-item"><Link to="/me">My Profile</Link> <a data-id="logout" href="">Logout</a></div> : <div className="nav-item"><Link to='/login'>Login</Link>  <Link to='/signup'>Signup</Link> </div> }
+        {(localStorage.getItem("jwtToken")) ? <div className="nav-item"><Link to="/me">My Profile</Link> <a data-id="logout" href="">Logout</a></div> : <div className="nav-item"><Link to='/login'>Login</Link> </div> }
       </div>
     </nav>
 	)

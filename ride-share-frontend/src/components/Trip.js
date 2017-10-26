@@ -18,7 +18,7 @@ const Trip = (props) => {
 			<Image src="placeholder" />
 			<Card.Content>
 				<Card.Header>
-					{props.origin} to {props.destination}
+					{props.origin} <br/>to <br/>{props.destination}
 				</Card.Header>
 				<Card.Meta>
 					Date: {props.date}

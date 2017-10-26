@@ -46,14 +46,15 @@ class TripForm extends React.Component {
 
   render() {
     return (
-      <div className="form-container">
+      <div id='trip-form'>
+        <h1> Let's go somewhere together. </h1>
         <div className="ui input">
           <form onSubmit={this.handleSubmit}>
-            <input onChange={this.handleDestinationChange} type="text" placeholder="where to?" required="true"/><br/>
-            <input onChange={this.handleOriginChange} type="text" placeholder="where from?" required="true"/><br/>
-            <input onChange={this.handleDateChange} type="date" required="true"/>
-            <input onChange={this.handleTimeChange} type="time" required="true"/><br/>
-            <input type="submit" />
+            <input onChange={this.handleDestinationChange} type="text" placeholder="where to?" required="true"/><br/><br/>
+            <input onChange={this.handleOriginChange} type="text" placeholder="where from?" required="true"/><br/><br/>
+            <input onChange={this.handleDateChange} type="date" required="true"/><br/>
+            <br/><p>Leaving at:</p> <input onChange={this.handleTimeChange} type="time" required="true"/><br/>
+            <br/><input type="submit" />
           </form>
         </div>
       </div>

@@ -14,7 +14,7 @@ class Home extends React.Component {
 
 	render() {
 		return(
-			<div className="form-container">
+			<div id='going-somewhere'>
 				<h1> Going somewhere? Bring somebody!</h1>
 				<Link to="/trips/new"><Button>Start a Trip</Button></Link>
 				<Link to="/trips"><Button>Find a Trip</Button></Link>

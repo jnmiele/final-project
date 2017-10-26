@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { Route, Switch, withRouter } from 'react-router-dom'
 import Footer from './components/Footer'
+import Logo from './components/Logo'
 import Home from './components/Home'
 import LoginForm from './components/LoginForm'
 import NavBar from './components/NavBar'
@@ -41,6 +42,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <Logo/>
         <NavBar/>
 
         <Switch>

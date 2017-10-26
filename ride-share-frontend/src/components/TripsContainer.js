@@ -16,18 +16,22 @@ class TripsContainer extends React.Component {
 	renderComponents = (props) => {
 		if (this.props.trips) {
 			if (this.props.history.location.pathname === "/trips"){
-				return (<TripsList />)
+				return (
+					<div id="trip-container">
+						<TripsList />
+					</div>
+				)
 			} else if (this.props.location.pathname === "/trips/new") {
-				return (<TripForm {...this.props}/>)
+				return (
+					<TripForm {...this.props}/>
+				)
 			}
 		}
 	}
 
 	render() {
-    return (
-      <div id="trip-container">
-      	{this.renderComponents()}  
-      </div>
+    return (    
+      <div>{this.renderComponents()}</div>
     )
   }
 }
