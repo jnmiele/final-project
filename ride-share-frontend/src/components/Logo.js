@@ -4,7 +4,7 @@ const Logo = () => {
 
 	return(
     <div id="logo">
-  		LOGO
+  		H I T C H H I K E R
     </div>
 	)
 }
