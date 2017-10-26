@@ -4,6 +4,7 @@ import './App.css';
 import { connect } from 'react-redux'
 
 import { Route, Switch, withRouter } from 'react-router-dom'
+import Credits from './components/Credits'
 import Footer from './components/Footer'
 import Logo from './components/Logo'
 import Home from './components/Home'
@@ -28,8 +29,6 @@ class App extends Component {
     }
   }
 
-  
-
   render() {
     const AuthorizedTripsContainer = Authorize(TripsContainer)
     const AuthorizedSignupForm = Authorize(SignupForm)
@@ -44,7 +43,8 @@ class App extends Component {
         <Logo/>
         <NavBar/>
 
-        <Switch>
+        <Switch>  
+          <Route exact path='/credits' render={Credits} />
           <Route exact path="/" render={(props) => <AuthorizedHome {...props} />}/>
           <Route exact path="/me" component={AuthorizedUserProfile}/>
           <Route exact path="/signup" component={AuthorizedSignupForm}/>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Card, Image, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
@@ -34,7 +34,12 @@ const CompletedOrPendingTrip = (props) => {
 	}
 
 	this.renderButton = () => {
+		console.log("render button called")
+		console.log(props)
+		console.log(props.userId === props.driver.id)
+		console.log(props.location)
 		if (props.userId === props.driver.id && props.location && props.location.pathname === '/me') {
+			console.log("render button called")
 			if (props.completed) {
 				return <Button size='mini' onClick={this.handleMarkPending} id={props.id}>Mark Pending</Button>
 			}		
@@ -42,6 +47,7 @@ const CompletedOrPendingTrip = (props) => {
 		}
 		return null
 	}
+
 	return(
 		<Card>
 			<Image src="placeholder" />
@@ -77,4 +83,4 @@ function mapDispatchToProps(dispatch){
 	}
 }
 
-export default connect(null, mapDispatchToProps)(CompletedOrPendingTrip)
+export default withRouter(connect(null, mapDispatchToProps)(CompletedOrPendingTrip))
