@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { showTrip, cancelTrip } from '../actions/trips'
 import { requestJoin } from '../actions/userTrips'
-// import PassengerRequestContainer from './PassengerRequestContainer'
 
 import { Button } from 'semantic-ui-react'
 
@@ -69,7 +68,7 @@ class TripShow extends React.Component {
     			</div>
     		)
     	} else if (!joined && !completed) {
-    		return <button id={this.props.thisTrip.id} onClick={this.handleJoin}> Join Trip </button>
+    		return <Button id={this.props.thisTrip.id} onClick={this.handleJoin}> Join Trip </Button>
     	} else if (!joined && completed) {
     		return <div> Sorry, this trip is no longer available. </div>
     	} else if (joined && completed) {
@@ -91,18 +90,19 @@ class TripShow extends React.Component {
 					const address = this.props.thisTrip.origin.replace(' ', '+')
 					return address
 				}
+				return this.props.thisTrip.origin
 			}
 			const destination = () => {
 				if (this.props.thisTrip.destination.includes(' ')) {
 					const address = this.props.thisTrip.destination.replace(' ', '+')
 					return address
 				}
+				return this.props.thisTrip.destination
 			}
 			const route = `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin()}&destination=${destination()}`
-
 			return(
 				<div className='trip-container'>
-					<iframe title='map' width='600' height='400' src={route}></iframe>
+					<iframe className='map' title='map' src={route}></iframe>
 					<div className='trip'>
 						<h2>Origin:  {this.props.thisTrip.origin}</h2>
 						<h2>Destination: {this.props.thisTrip.destination}</h2>

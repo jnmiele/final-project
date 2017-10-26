@@ -87,24 +87,20 @@ body, html {
 }
 
 .trip-container {
-  padding-top: 5%;
-  margin: auto;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 5% 40% 5% 40%;
 }
 
 .trip {
-  background-color:rgba(0,0,0,.6);
+  border-radius: 25px;
+  background-color:rgba(255,255,255,.4);
   font-size: large;
   color: white;
-  padding-bottom:2%;
+  padding: 0 5% 5% 5%;
 }
 
 #trip-form {
   border-radius: 25px;
-  background-color:rgba(255,255,255,.2);
+  background-color:rgba(255,255,255,.4);
   margin: 5% 32.5%;
   padding: 2% 0 2% 0;
   font-size: large;
@@ -120,7 +116,7 @@ body, html {
 
 #login {
   border-radius: 25px;
-  background-color:rgba(255,255,255,.2);
+  background-color:rgba(255,255,255,.4);
   margin: 9% 0 10% 33%;
   font-size: large;
   color: white;
@@ -131,7 +127,7 @@ body, html {
 
 #signup {
   border-radius: 25px;
-  background-color:rgba(255,255,255,.2);
+  background-color:rgba(255,255,255,.4);
   margin: 5% 0 5% 35%;
   font-size: large;
   color: white;
@@ -151,7 +147,7 @@ p {
 }
 
 .form-container {
-  background-color:rgba(255,255,255,.2);
+  background-color:rgba(255,255,255,.4);
   margin: auto;
   font-size: large;
   color: white;
@@ -165,7 +161,7 @@ p {
 }
 
 .ui.cards {
-  background-color:rgba(255,255,255,.2);
+  background-color:rgba(255,255,255,.4);
   margin: auto;
   padding-left: 3%;
   padding-top: 3%;
@@ -178,11 +174,17 @@ p {
 #going-somewhere {
   margin: 10%;
   border-radius: 25px;
-  background-color:rgba(255,255,255,.2);
+  background-color:rgba(255,255,255,.4);
   margin: 10% 0 10% 30.5%;
   font-size: large;
   color: white;
   height: 40%;
   width: 40%;
   padding: 2.5% 0 2.5% 0;
+}
+
+.map {  
+  border-radius: 25px;
+  width: 100%;
+  height: 300px;
 }
