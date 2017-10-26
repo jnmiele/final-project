@@ -53,7 +53,7 @@ class TripForm extends React.Component {
             <input onChange={this.handleDestinationChange} type="text" placeholder="where to?" required="true"/><br/><br/>
             <input onChange={this.handleOriginChange} type="text" placeholder="where from?" required="true"/><br/><br/>
             <input onChange={this.handleDateChange} type="date" required="true"/><br/>
-            <br/><p>Leaving at:</p> <input onChange={this.handleTimeChange} type="time" required="true"/><br/>
+            <br/><p>Leaving at: <input onChange={this.handleTimeChange} type="time" required="true"/></p>
             <br/><input type="submit" />
           </form>
         </div>

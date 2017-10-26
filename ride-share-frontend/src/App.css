@@ -105,16 +105,12 @@ body, html {
 #trip-form {
   border-radius: 25px;
   background-color:rgba(255,255,255,.2);
-  margin: auto;
+  margin: 5% 32.5%;
+  padding: 2% 0 2% 0;
   font-size: large;
   color: white;
-  position: fixed;
-  height: 500px;
-  width: 500px;
-  padding-top: 2%;
-  top: 50%;
-  left: 49.6%;
-  transform: translate(-50%, -50%);
+  height: 60%;
+  width: 35%;
 }
 
 #profile-column-container {
@@ -125,31 +121,23 @@ body, html {
 #login {
   border-radius: 25px;
   background-color:rgba(255,255,255,.2);
-  margin: auto;
+  margin: 9% 0 10% 33%;
   font-size: large;
   color: white;
-  position: fixed;
-  height: 350px;
-  width: 600px;
-  padding-top: 2.5%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 32%;
+  width: 35%;
+  padding: 2.5% 0 2.5% 0;
 }
 
 #signup {
   border-radius: 25px;
   background-color:rgba(255,255,255,.2);
-  margin: auto;
+  margin: 5% 0 5% 35%;
   font-size: large;
   color: white;
-  position: fixed;
-  height: 600px;
-  width: 600px;
-  padding-top: 2%;
-  top: 25%;
-  left: 25%;
-  transform: translate(30%, 0%);
+  height: 30%;
+  width: 30%;
+  padding: 2% 0 2% 0;
 }
 
 p {
@@ -188,16 +176,13 @@ p {
 }
 
 #going-somewhere {
+  margin: 10%;
   border-radius: 25px;
   background-color:rgba(255,255,255,.2);
-  margin: auto;
+  margin: 10% 0 10% 30.5%;
   font-size: large;
   color: white;
-  position: fixed;
-  height: 200px;
-  width: 600px;
-  padding-top: 2.5%;
-  top: 40%;
-  left: 24.7%;
-  transform: translate(30%,0%);
+  height: 40%;
+  width: 40%;
+  padding: 2.5% 0 2.5% 0;
 }
