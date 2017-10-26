@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Card } from 'semantic-ui-react'
-
+import { Link } from 'react-router-dom'
 import CompletedOrPendingTrip from './CompletedOrPendingTrip'
 
 
@@ -27,7 +27,7 @@ class PendingTripsContainer extends React.Component {
 			)	
 		}
 		return(	
-			<div> loader </div>
+			<p> Looks like you have no trips yet... You can <Link to='/trips/new'>start a trip</Link> or <Link to='/trips'>join a trip</Link>! </p>
 		)
 	}
 }

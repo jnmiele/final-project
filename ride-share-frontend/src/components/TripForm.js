@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createTrip } from '../actions/trips'
 
-
-
 class TripForm extends React.Component {
 
   state = {

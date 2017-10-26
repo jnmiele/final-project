@@ -24,7 +24,7 @@ class CompletedTripsContainer extends React.Component {
 			)	
 		}
 		return(
-			<div> loader </div>
+			<p> No completed trips at this time.</p>
 		)
 	}
 }

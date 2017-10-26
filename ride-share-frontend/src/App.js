@@ -19,7 +19,6 @@ import { setCurrentUser } from './actions/users'
 import { fetchAllUserTrips } from './actions/userTrips'
 
 
-
 class App extends Component {
 
   componentDidMount() {

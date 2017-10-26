@@ -22,7 +22,7 @@ class PassengerRequestContainer extends React.Component {
 			)	
 		}
 		return(
-			<div> loader </div>
+			<p> No pending passenger requests at this time.</p>
 		)
 	}
 }
