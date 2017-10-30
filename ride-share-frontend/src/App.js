@@ -53,7 +53,7 @@ class App extends Component {
           <Route exact path="/trips/new" render={(props) => <AuthorizedTripsContainer {...props} {...this.props} />}/>
           <Route exact path="/trips" render={(props) => <AuthorizedTripsContainer {...props} {...this.props}/>}/>
           <Route exact path="/trips/:id" component={AuthorizedTripShow}/>
-          <Route render={() => <div> Error 404: Yeah you know what that means...</div>} />
+          <Route render={() => <p><br/><br/> Error 404: Woops - looks like you tried visiting a page that doesn't exist or we have a broken link. <br/><br/>Apologies for the inconvenience. <br/>Shoot an email with a concern via the 'Contact Me' link at the bottom of the page to allow me to address it. <br/>Thanks!</p>} />
         </Switch>
         
         <Footer />

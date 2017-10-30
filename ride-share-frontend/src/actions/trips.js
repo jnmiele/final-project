@@ -13,6 +13,7 @@ export function createTrip(tripParams, history) {
   })
   .then(res => res.json())
   .then(res => dispatch(newTrip(res)))
+  .then(() => fetchAllTrips())
 	}
 }
 

@@ -24,7 +24,6 @@ class UserProfile extends React.Component {
             </Grid.Column>
 
             <Grid.Column>
-              
               <PendingTripsContainer {...this.props.currentUser}/>
             </Grid.Column>
 

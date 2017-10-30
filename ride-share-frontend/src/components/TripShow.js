@@ -18,13 +18,13 @@ class TripShow extends React.Component {
 	handleJoin = (event) => {
 		const tripId = event.target.id
 		this.props.requestJoin(tripId)
-		this.props.history.push('/me')
+    this.props.history.push('/')
 	}
 
 	cancelTrip = (event) => {
 		const tripId = event.target.id
 		this.props.cancelTrip(tripId)
-		this.props.history.push('/me')
+    this.props.history.push('/')
 	}
 
 	checkIfJoined() {
@@ -134,7 +134,8 @@ function mapStateToProps(state) {
 	return {
 		user: state.users.currentUser,
 		thisTrip: state.trips.thisTrip,
-		currentUser: state.users.currentUser
+		currentUser: state.users.currentUser,
+		trips: state.users.trips
 	}
 }
 

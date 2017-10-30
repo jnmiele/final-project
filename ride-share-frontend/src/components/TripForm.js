@@ -15,7 +15,7 @@ class TripForm extends React.Component {
     event.preventDefault()
     const tripParams = {...this.state}
     this.props.createTrip(tripParams)
-    this.props.history.push('/me')
+    this.props.history.push('/')
   }
 
   handleOriginChange = (event) => {

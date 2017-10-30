@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div id='login'>
-        <h1> Welcome back. Let's go somewhere. </h1>
+        <h1> Welcome, let's go somewhere! </h1>
         <div className='error-handler'>
         </div>
         <div className="ui input">
