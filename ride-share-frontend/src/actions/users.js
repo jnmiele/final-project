@@ -14,7 +14,7 @@ export function createUser(userParams) {
   .then(res => res.json())
   .then(res => dispatch(doLogin(res)))
   .then(res => {
-      {res.payload.jwt? localStorage.setItem('jwtToken', res.payload.jwt):null}
+      res.payload.jwt? localStorage.setItem('jwtToken', res.payload.jwt):null
       dispatch(set(res.payload.user))
     })
 	}

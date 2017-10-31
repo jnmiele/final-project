@@ -1,7 +1,8 @@
+import { setCurrentUser } from './users'
+
 export function requestJoin(trip) {
   const token = localStorage.getItem("jwtToken")
   const body = JSON.stringify({trip, jwt: token})
-  console.log(body)
   return function(dispatch) {
     fetch(`http://localhost:3000/usertrips/create`, {
       method: "POST",
@@ -14,6 +15,8 @@ export function requestJoin(trip) {
     })
     .then(res => res.json())
     .then(res => dispatch(sendReq(res)))
+    .then(() => dispatch(fetchAllUserTrips()))
+    .then(() => dispatch(setCurrentUser()))
   }
 }
 

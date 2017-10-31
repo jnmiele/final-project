@@ -24,6 +24,7 @@ class TripShow extends React.Component {
 	cancelTrip = (event) => {
 		const tripId = event.target.id
 		this.props.cancelTrip(tripId)
+		alert('Looks like you canceled your trip. Too bad!')
 		this.props.history.push('/me')
 	}
 
@@ -139,14 +140,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripShow)
-
-
-// <div>
-//     				<Button onClick={this.cancelTrip} id={this.props.thisTrip.id}> Cancel Trip </Button><br/>
-//     				<br/>
-//     				<Grid columns={1}> 
-//           		<Grid.Column>
-//     						{this.props.thisTrip.passengers.length > 0 ? <PassengerRequestContainer {...this.props.thisTrip.userTrips}/> : "Looks like there's no requests to join your trip right now..."}
-//     					</Grid.Column>
-//     				</Grid> 
-//     			</div>
