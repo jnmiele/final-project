@@ -18,13 +18,13 @@ class TripShow extends React.Component {
 	handleJoin = (event) => {
 		const tripId = event.target.id
 		this.props.requestJoin(tripId)
-    this.props.history.push('/')
+    this.props.history.push('/me')
 	}
 
 	cancelTrip = (event) => {
 		const tripId = event.target.id
 		this.props.cancelTrip(tripId)
-    this.props.history.push('/')
+    this.props.history.push('/me')
 	}
 
 	checkIfJoined() {
@@ -134,20 +134,8 @@ function mapStateToProps(state) {
 	return {
 		user: state.users.currentUser,
 		thisTrip: state.trips.thisTrip,
-		currentUser: state.users.currentUser,
-		trips: state.users.trips
+		currentUser: state.users.currentUser
 	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripShow)
-
-
-// <div>
-//     				<Button onClick={this.cancelTrip} id={this.props.thisTrip.id}> Cancel Trip </Button><br/>
-//     				<br/>
-//     				<Grid columns={1}> 
-//           		<Grid.Column>
-//     						{this.props.thisTrip.passengers.length > 0 ? <PassengerRequestContainer {...this.props.thisTrip.userTrips}/> : "Looks like there's no requests to join your trip right now..."}
-//     					</Grid.Column>
-//     				</Grid> 
-//     			</div>

@@ -109,7 +109,7 @@ function set(user) {
 export function logoutUser() {
   return {
     type: 'LOGOUT_USER',
-    payload: 'loogout'
+    payload: 'logout'
   }
 }
 

@@ -15,7 +15,7 @@ class TripForm extends React.Component {
     event.preventDefault()
     const tripParams = {...this.state}
     this.props.createTrip(tripParams)
-    this.props.history.push('/')
+    this.props.history.push('/trips')
   }
 
   handleOriginChange = (event) => {
@@ -69,4 +69,10 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(TripForm)
+function mapStateToProps(state) {
+  return {
+    trips: state.trips.list
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TripForm)
