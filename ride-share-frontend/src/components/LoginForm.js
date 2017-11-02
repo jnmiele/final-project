@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-
 import { loginUser } from '../actions/users'
+import { Button } from 'semantic-ui-react'
 
 class LoginForm extends React.Component {
   state = {
@@ -13,6 +13,12 @@ class LoginForm extends React.Component {
   handleLogin = (event) => {
     event.preventDefault()
     const loginParams = {email: this.state.email, password: this.state.password}
+    this.props.loginUser(loginParams)
+  }
+
+  handleDemo = (event) => {
+    event.preventDefault()
+    const loginParams = {email: 'jamesnmiele@gmail.com', password: '1234'}
     this.props.loginUser(loginParams)
   }
 
@@ -42,7 +48,8 @@ class LoginForm extends React.Component {
             <input type="submit" />
           </form>
         </div>
-        <p> <br/>First time hitchhiking? <Link to='/signup'>Sign up here!</Link> </p>       
+        <p> <br/>First time hitchhiking? <Link to='/signup'>Sign up here!</Link> </p>
+        <Button onClick={this.handleDemo}>DEMO</Button>       
       </div>
     )
   }
