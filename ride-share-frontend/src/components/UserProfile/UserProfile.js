@@ -1,30 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import PassengerRequestContainer from './PassengerRequestContainer'
-import CompletedTripsContainer from './CompletedTripsContainer'
-import PendingTripsContainer from './PendingTripsContainer'
-import UserProfileBio from './UserProfileBio'
+import PassengerRequestContainer from '../PassengerRequestContainer'
+import TripsContainer from './TripsContainer'
+import UserProfileBio from '../UserProfileBio'
 
 import { Grid } from 'semantic-ui-react'
 
 class UserProfile extends React.Component {
 
 	render() {
-    if (this.props.currentUser && this.props.currentUser.id !== 0) {
+    const { currentUser } = this.props;
+
+    if (currentUser && currentUser.id !== 0) {
       return(
       <div>
-
-        <UserProfileBio user={this.props.currentUser}/>
+        <UserProfileBio user={currentUser}/>
         <div id='profile-column-container'>
           <Grid columns={3} divided>
 
             <Grid.Column>
-              <CompletedTripsContainer {...this.props.currentUser}/>
+              <TripsContainer containerType='completed' {...currentUser}/>
             </Grid.Column>
 
             <Grid.Column>
-              <PendingTripsContainer {...this.props.currentUser}/>
+              <TripsContainer containerType='pending' {...currentUser}/>
             </Grid.Column>
 
             <Grid.Column>

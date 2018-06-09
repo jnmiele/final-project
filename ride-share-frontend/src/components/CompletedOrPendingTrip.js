@@ -34,12 +34,7 @@ const CompletedOrPendingTrip = (props) => {
 	}
 
 	this.renderButton = () => {
-		console.log("render button called")
-		console.log(props)
-		console.log(props.userId === props.driver.id)
-		console.log(props.location)
 		if (props.userId === props.driver.id && props.location && props.location.pathname === '/me') {
-			console.log("render button called")
 			if (props.completed) {
 				return <Button size='mini' onClick={this.handleMarkPending} id={props.id}>Mark Pending</Button>
 			}		

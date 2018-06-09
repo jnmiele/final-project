@@ -28,12 +28,4 @@ class CompletedTripsContainer extends React.Component {
 		)
 	}
 }
-
-function mapStateToProps(state) {
-	return {
-		// trips: state.users.currentUser.trips,
-		// currentUserId: state.users.currentUser.id
-	}
-}
-
-export default connect(mapStateToProps)(CompletedTripsContainer)
+export default CompletedTripsContainer

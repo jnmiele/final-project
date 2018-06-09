@@ -13,7 +13,7 @@ import NavBar from './components/NavBar'
 import SignupForm from './components/SignupForm'
 import TripsContainer from './components/TripsContainer'
 import TripShow from './components/TripShow'
-import UserProfile from './components/UserProfile'
+import UserProfile from './components/UserProfile/UserProfile'
 import UsersShow from './components/UsersShow'
 import Authorize from './components/Authorize'
 import { setCurrentUser } from './actions/users'
@@ -53,7 +53,7 @@ class App extends Component {
           <Route exact path="/trips/new" render={(props) => <AuthorizedTripsContainer {...props} {...this.props} />}/>
           <Route exact path="/trips" render={(props) => <AuthorizedTripsContainer {...props} {...this.props}/>}/>
           <Route exact path="/trips/:id" component={AuthorizedTripShow}/>
-          <Route render={() => <p><br/><br/> Error 404: Woops - looks like you tried visiting a page that doesn't exist or we have a broken link. <br/><br/>Apologies for the inconvenience. <br/>Shoot an email with a concern via the 'Contact Me' link at the bottom of the page to allow me to address it. <br/>Thanks!</p>} />
+          <Route render={() => <p><br/><br/> Error 404: Woops - looks like you tried visiting a page that doesn't exist or we have a broken link. <br/><br/>Apologies for the inconvenience. <br/>Shoot me an <a href='mailto:jamesnmiele@gmail.com'>email</a> with the details to allow me to address it. <br/>Thanks!</p>} />
         </Switch>
         
         <Footer />
