@@ -28,12 +28,13 @@ class TripShow extends React.Component {
 	}
 
 	checkIfJoined() {
-  if (this.props.currentUser.id !== 0) {
-    const passengers = this.props.thisTrip.passengers
-    const userId = this.props.currentUser.id
-	    if (passengers.find(p => p.id === userId)) {
-	      return true
-	    }
+		const { 
+			currentUser: { id }, 
+			thisTrip: { passengers } 
+		} = this.props
+
+  	if (id !== 0) {
+	    passengers.find(p => p.id === id) ? true : false 
 	  }
 	}
 
@@ -42,8 +43,14 @@ class TripShow extends React.Component {
 	}
 
   displayButton = () => {
-    if (this.props.currentUser.id === this.props.thisTrip.driver.id) {
-    	if (this.props.thisTrip.completed) {
+  	const {
+  		currentUser,
+  		thisTrip,
+  		thisTrip: { driver, completed }
+  	} = this.props
+
+    if (currentUser.id === driver.id) {
+    	if (completed) {
     		return (
     			<div> 
     				This trip was already completed!<br/><br/>
@@ -57,25 +64,28 @@ class TripShow extends React.Component {
     			<p><Button onClick={this.cancelTrip} id={this.props.thisTrip.id}> Cancel Trip </Button></p>
     		</div>
     	)
-    } else if (this.props.currentUser.id !== this.props.thisTrip.driver.id) {
+    } else if (currentUser.id !== driver.id) {
     	const joined = this.checkIfJoined()
-    	const completed = this.props.thisTrip.completed
-    	if (joined === true && !this.props.thisTrip.completed) {
+
+    	if (joined === true && !completed) {
     		return (
     			<div>
-    				Hey {this.props.currentUser.email}! Looks like you already requested to join this trip.<br/>
+    				Hey {currentUser.email}! Looks like you already requested to join this trip.<br/>
     				<Link to='/me'>View My Trips</Link>
     			</div>
     		)
+
     	} else if (!joined && !completed) {
-    		return <Button id={this.props.thisTrip.id} onClick={this.handleJoin}> Join Trip </Button>
+    		return <Button id={thisTrip.id} onClick={this.handleJoin}> Join Trip </Button>
+
     	} else if (!joined && completed) {
     		return <div> Sorry, this trip is no longer available. </div>
+
     	} else if (joined && completed) {
     		return (
     			<div>
     				This trip was already completed!<br/><br/>
-    				<p><Button onClick={this.handleRate} id={this.props.thisTrip.id}> Rate the Riders </Button></p>
+    				<p><Button onClick={this.handleRate} id={thisTrip.id}> Rate the Riders </Button></p>
     			</div>
     		)		 				
     	}
@@ -83,30 +93,44 @@ class TripShow extends React.Component {
   }
 
 	render() {
-		if (this.props.thisTrip) {
-			const key = 'AIzaSyDkLcl-yTJinR7cqhbcqldTXX8x5LSw6sg'
+		const { thisTrip } = this.props
+
+		if (thisTrip) {
+
+			// Hide API key
+			const key = ''
+
+			/**
+			 * Helper method to replace whitespace in the origin (string) with a '+' 
+			 */
 			const origin = () => {
-				if (this.props.thisTrip.origin.includes(' ')) {
-					const address = this.props.thisTrip.origin.replace(' ', '+')
+				if (thisTrip.origin.includes(' ')) {
+					const address = thisTrip.origin.replace(' ', '+')
 					return address
 				}
-				return this.props.thisTrip.origin
+				return thisTrip.origin
 			}
+
+			/**
+			 * Helper method to replace whitespace in the destination (string) with a '+' 
+			 */
 			const destination = () => {
-				if (this.props.thisTrip.destination.includes(' ')) {
-					const address = this.props.thisTrip.destination.replace(' ', '+')
+				if (thisTrip.destination.includes(' ')) {
+					const address = thisTrip.destination.replace(' ', '+')
 					return address
 				}
-				return this.props.thisTrip.destination
+				return thisTrip.destination
 			}
+
 			const route = `https://www.google.com/maps/embed/v1/directions?key=${key}&origin=${origin()}&destination=${destination()}`
+
 			return(
 				<div className='trip-container'>
 					<iframe className='map' title='map' src={route}></iframe>
 					<div className='trip'>
-						<h2>Origin:  {this.props.thisTrip.origin}</h2>
-						<h2>Destination: {this.props.thisTrip.destination}</h2>
-						<p>Driver: <Link to={`/users/${this.props.thisTrip.driver.id}`}> {this.props.thisTrip.driver.name} </Link></p>
+						<h2>Origin:  {thisTrip.origin}</h2>
+						<h2>Destination: {thisTrip.destination}</h2>
+						<p>Driver: <Link to={`/users/${thisTrip.driver.id}`}> {thisTrip.driver.name} </Link></p>
 						{this.displayButton()}
 					</div>
 				</div>
@@ -131,10 +155,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
+	const { 
+		trips: { thisTrip }, 
+		users: { currentUser } 
+	} = state
 	return {
-		user: state.users.currentUser,
-		thisTrip: state.trips.thisTrip,
-		currentUser: state.users.currentUser
+		thisTrip: thisTrip,
+		currentUser: currentUser
 	}
 }
 

@@ -18,18 +18,22 @@ class SignupForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.checkPassword()
+
+    const { email, firstName, lastName, password, passwordConfirmation } = this.state;
+    this.checkPassword(password, passwordConfirmation)
+    
     const userParams = {
-      email: this.state.email,
-      name: [this.state.firstName, this.state.lastName],
-      password: this.state.password
+      email: email,
+      name: [firstName, lastName],
+      password: password
     }
+
     this.props.createUser(userParams)
     this.props.history.push('/')
   }
 
-  checkPassword() {
-    if (this.state.password !== this.state.passwordConfirmation) {
+  checkPassword = (password, passwordConfirmation) => {
+    if (password !== passwordConfirmation) {
       this.setState({
         password: "",
         passwordConfirmation: ""
@@ -37,48 +41,56 @@ class SignupForm extends React.Component {
     }
   }
 
-  handleEmailChange = (event) => {
-    this.setState({
-      email: event.target.value
-    })
-  }  
+  handleInputChage = ({ target: { dataset, value } }) => {
+    const key = dataset.id
 
-  handleFirstNameChange = (event) => {
-    this.setState({
-      firstName: event.target.value
-    })
-  }
+    switch (key) {
+      case 'email':
+        this.setState({ email: value })
+        break;
 
-handleLastNameChange = (event) => {
-    this.setState({
-      lastName: event.target.value
-    })
-  }
+      case 'firstName':
+        this.setState({ firstName: value })
+        break;
 
-handlePasswordChange = (event) => {
-    this.setState({
-      password: event.target.value
-    })
-  }
+      case 'lastName':
+        this.setState({ lastName: value })
+        break;
 
-handlePasswordConfirmationChange = (event) => {
-    this.setState({
-      passwordConfirmation: event.target.value
-    })
+      case 'password':
+        this.setState({ password: value })
+        break;
+
+      case 'passwordConfirmation':
+        this.setState({ passwordConfirmation: value })
+        break;
+    }
   }
 
   render() {
+
+    const { email, firstName, lastName, password, passwordConfirmation } = this.state
+
+    const { 
+      handleEmailChange, 
+      handleFirstNameChange, 
+      handleLastNameChange, 
+      handlePasswordChange, 
+      handlePasswordConfirmationChange, 
+      handleSubmit 
+    } = this
+
     return (
       <div id='signup'>
         <h1>Get where you need to go.</h1>
         <p> Sign up and take a trip.</p>
         <div className="ui input">
-          <form onSubmit={this.handleSubmit}>
-            <input onChange={this.handleEmailChange} value={this.state.email} type="text" placeholder="enter your email" required="true"/><br/><br/>
-            <input onChange={this.handleFirstNameChange} value={this.state.firstName} type="text" placeholder="enter your first name" required="true"/><br/><br/>
-            <input onChange={this.handleLastNameChange} value={this.state.lastName} type="text" placeholder="enter your last name" required="true"/><br/><br/>
-            <input onChange={this.handlePasswordChange} value={this.state.password} type="password" placeholder="enter a password" required="true"/><br/><br/>
-            <input onChange={this.handlePasswordConfirmationChange} value={this.state.passwordConfirmation} type="password" placeholder="confirm your password" required="true"/><br/>
+          <form onSubmit={handleSubmit}>
+            <input data-id='email' onChange={handleEmailChange} value={email} type="text" placeholder="enter your email" required="true"/><br/><br/>
+            <input data-id='firstName' onChange={handleFirstNameChange} value={firstName} type="text" placeholder="enter your first name" required="true"/><br/><br/>
+            <input data-id='lastName' onChange={handleLastNameChange} value={lastName} type="text" placeholder="enter your last name" required="true"/><br/><br/>
+            <input data-id='password' onChange={handlePasswordChange} value={password} type="password" placeholder="enter a password" required="true"/><br/><br/>
+            <input data-id='passwordConfirmation' onChange={handlePasswordConfirmationChange} value={passwordConfirmation} type="password" placeholder="confirm your password" required="true"/><br/>
             <br/><br/>
             <div className='submit'><input type="submit"/></div>
           </form>

@@ -2,8 +2,7 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 import { show } from '../actions/users'
-import CompletedTripsContainer from './CompletedTripsContainer'
-import PendingTripsContainer from './PendingTripsContainer'
+import TripsContainer from './UserProfile/TripsContainer'
 import UserProfileBio from './UserProfileBio'
 
 import { Grid } from 'semantic-ui-react'
@@ -12,24 +11,26 @@ import { Grid } from 'semantic-ui-react'
 class UsersShow extends React.Component {
 
 	componentDidMount(){
-		const user = (this.props.location.pathname)
-		this.props.show(user)
+		const { location: { pathname }, show } = this.props;
+		const user = (pathname)
+		show(user)
 	}
 
 	render() {
-		if (this.props.user !== undefined && this.props.user.showUser !== undefined) {
+		const { user, user: { showUser }} = this.props
+		if (user !== undefined && showUser !== undefined) {
 			return(
 				<div>
-					<UserProfileBio user={this.props.user.showUser} />
+					<UserProfileBio user={showUser} />
 					<div>
 						<Grid columns={2} divided>
 
 	          	<Grid.Column>
-	            	<CompletedTripsContainer {...this.props.user.showUser}/>
+	            	<TripsContainer {...showUser}/>
 	         	  </Grid.Column>
 
 	          	<Grid.Column>
-	            	<PendingTripsContainer {...this.props.user.showUser}/>
+	            	<TripsContainer {...showUser}/>
 	          	</Grid.Column>
 
 	        	</Grid>
@@ -52,10 +53,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
+	const { users, trips: { list }, userTrips } = state
 	return {
-		user: state.users,
-		trips: state.trips.list,
-		userTrips: state.userTrips
+		user: users,
+		trips: list,
+		userTrips: userTrips
 	}
 }
 

@@ -36,13 +36,13 @@ class UserProfile extends React.Component {
       </div>
     )
     }
-  	return (<div> loading </div>)
+  	return <div> loading </div>
 	}
 }
 
 function mapStateToProps(state) {
 	return {
-		currentUser: state.users.currentUser,
+    currentUser: state.users.currentUser,
     userTrips: state.userTrips.all
 	}
 }
